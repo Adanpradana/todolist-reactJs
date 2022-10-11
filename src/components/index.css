@@ -1,0 +1,70 @@
+.flex {
+  display: flex;
+  align-items: center;
+
+  height: 3em;
+}
+.control-button {
+  display: flex;
+  align-items: center;
+}
+.input-control {
+  flex: 2 0 auto;
+}
+.button.button-hover {
+  margin-left: 1em;
+}
+
+.flex:hover {
+  background-color: #eeeeee;
+}
+
+.button-hover {
+  /* padding: 0.3em; */
+  border-radius: 4px;
+  margin-left: 0.4em;
+  cursor: pointer;
+  color: #929292;
+  display: none;
+}
+.button-hover-active {
+  /* padding: 0.3em; */
+  border-radius: 4px;
+  margin-left: 0.4em;
+  cursor: pointer;
+  color: #929292;
+}
+
+.p-control p {
+  margin-left: 0.5em;
+}
+.logo-hover {
+  background-color: rgb(206, 206, 206);
+  padding: 0.3em;
+  border-radius: 4px;
+
+  cursor: pointer;
+  color: #929292;
+}
+
+.wrapper {
+  /* background-color: azure; */
+  display: flex;
+  align-items: center;
+  padding: 0.3em;
+  border-radius: 4px;
+  margin-left: 0.4em;
+  color: #929292;
+}
+.logo-wrapper {
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  border-radius: 3px;
+}
+
+.logo-wrapper:hover {
+  background-color: #d3d3d3;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  border-radius: 3px;
+}
