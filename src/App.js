@@ -3,11 +3,36 @@ import Show from "./components/Show.username";
 import { AppContext } from "./useContext/app-context";
 import { useState } from "react";
 function App() {
+  //addState
   const [name, setName] = useState("");
   const [list, setList] = useState([]);
-  const [edit, setEdit] = useState({});
-  const [error, setEerror] = useState("");
+  // const [error, setEerror] = useState("");
 
+  //editState
+  const [edit, setEdit] = useState("");
+  // const [todo, setTodo] = useState([]);
+  const [editList, setEditList] = useState({});
+  const [showEdit, setShowEdit] = useState(-1);
+
+  const saveEdit = (event) => {
+    event.preventDefault();
+    const editedTodo = {
+      id: editList.id,
+      name: edit,
+    };
+    const index = list.findIndex((todo) => {
+      return todo.id === editList.id;
+    });
+
+    list[index] = editedTodo; //ini kunci edit object di array
+
+    setShowEdit(edit.id);
+  };
+  const cancelEdit = () => {
+    setEditList({});
+    setEdit("");
+    setShowEdit(showEdit !== editList.id);
+  };
   const updateUsername = (event) => {
     event.preventDefault();
     const showTodo = [
@@ -20,9 +45,7 @@ function App() {
     setList(showTodo);
     setName("");
   };
-  const getId = () => {
-    list.map((item, id) => (item.id = id + 1));
-  };
+  const getId = () => Date.now();
 
   const removeId = (todoId) => {
     const remove = list.filter((todo) => todo.id !== todoId);
@@ -30,19 +53,31 @@ function App() {
   };
   const getValueForm = (event) => setName(event.target.value);
 
-  const editHandler = (list) => {
-    
-    console.log(list, "oke");
+  //edit handler form
+  const showEditHandler = (item) => {
+    setEdit(item.name);
+    setShowEdit(item.id);
+    setEditList(item);
   };
+  const editHandler = (event) => setEdit(event.target.value);
+  //end edit handler
   const valueProvider = {
-    error,
+    edit,
+    editList,
     name,
     list,
-    edit,
-    editHandler,
+    showEdit,
+    cancelEdit,
+    setName,
     updateUsername,
     getValueForm,
+    getId,
     removeId,
+    setEdit,
+    setEditList,
+    showEditHandler,
+    editHandler,
+    saveEdit,
   };
 
   return (

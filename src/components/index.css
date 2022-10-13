@@ -4,6 +4,12 @@
 
   height: 3em;
 }
+.flex-edit {
+  display: flex;
+  align-items: center;
+  height: 3em;
+  background-color: #eeeeee;
+}
 .control-button {
   display: flex;
   align-items: center;
