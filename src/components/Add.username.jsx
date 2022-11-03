@@ -1,3 +1,4 @@
+import { Alert } from "antd";
 import { useContext } from "react";
 import { AppContext } from "../useContext/app-context";
 
@@ -18,6 +19,13 @@ const Add = () => {
               <button className="button is-info">Submit</button>
             </div>
           </div>
+          {context.error ? (
+            <div>
+              <Alert message="Error Text" type="error" />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </form>
     </div>

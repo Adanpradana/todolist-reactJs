@@ -1,8 +1,8 @@
 import { Children, useContext, useState } from "react";
 import { AppContext } from "../useContext/app-context";
-import "./index.css";
 import { FaEdit } from "react-icons/fa";
 import FormEdit from "./Form-edit/Form.edit";
+import EmptyTodo from "./empty-todo/Empty.todo";
 
 const Show = () => {
   const context = useContext(AppContext);
@@ -11,19 +11,17 @@ const Show = () => {
 
   return (
     <div className="box content">
-      <h1>Show user</h1>
+      {context.list.length === 0 ? <EmptyTodo /> : <h1>Todo List</h1>}
       {Children.toArray(
         list.map((item, i) =>
           context.showEdit === item.id ? (
             <div className="field is-grouped">
               <div
-                onMouseEnter={(event) => {
+                onMouseEnter={() => {
                   setIsHover(item.id);
-                  event.stopPropagation();
                 }}
-                onMouseLeave={(event) => {
+                onMouseLeave={() => {
                   setIsHover(-1);
-                  event.stopPropagation();
                 }}
                 className={context.editList ? "control is-expanded flex-edit" : "control is-expanded flex"}
               >
@@ -45,13 +43,11 @@ const Show = () => {
           ) : (
             <div className="field is-grouped">
               <div
-                onMouseEnter={(event) => {
+                onMouseEnter={() => {
                   setIsHover(item.id);
-                  event.stopPropagation();
                 }}
-                onMouseLeave={(event) => {
+                onMouseLeave={() => {
                   setIsHover(-1);
-                  event.stopPropagation();
                 }}
                 className="control is-expanded flex"
               >
@@ -77,8 +73,6 @@ const Show = () => {
           )
         )
       )}
-
-      <p>email</p>
     </div>
   );
 };

@@ -1,18 +1,38 @@
 import Add from "./components/Add.username";
 import Show from "./components/Show.username";
 import { AppContext } from "./useContext/app-context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import "./components/index.css";
+import "./components/empty-todo/emptyTodo.css";
+import axios from "axios";
+
 function App() {
+  //get Rand Quotes API
+
   //addState
   const [name, setName] = useState("");
   const [list, setList] = useState([]);
-  // const [error, setEerror] = useState("");
-
+  const [error, setEerror] = useState("");
+  const [quotes, setQuotes] = useState("");
   //editState
   const [edit, setEdit] = useState("");
-  // const [todo, setTodo] = useState([]);
   const [editList, setEditList] = useState({});
   const [showEdit, setShowEdit] = useState(-1);
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `https://type.fit/api/quotes`,
+    })
+      .then((data) => {
+        const rand = Math.floor(Math.random() * data.data.length);
+        setQuotes(data.data[rand]);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  }, []);
 
   const saveEdit = (event) => {
     event.preventDefault();
@@ -35,6 +55,10 @@ function App() {
   };
   const updateUsername = (event) => {
     event.preventDefault();
+    if (!name) {
+      return setEerror("isi dlu brok ");
+    }
+    setEerror("");
     const showTodo = [
       ...list,
       {
@@ -65,8 +89,11 @@ function App() {
     edit,
     editList,
     name,
+    error,
     list,
     showEdit,
+    quotes,
+    loading,
     cancelEdit,
     setName,
     updateUsername,
@@ -83,7 +110,6 @@ function App() {
   return (
     <div className="container">
       <AppContext.Provider value={valueProvider}>
-        <h3>henlo</h3>
         <Add />
         <Show />
       </AppContext.Provider>

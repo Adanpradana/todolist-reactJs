@@ -1,0 +1,25 @@
+.empty-todo {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.wrapper-empty {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: #929292;
+}
+
+.create {
+  font-size: 2rem;
+  font-weight: 200;
+}
+.loader {
+  margin: 20px 0;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
