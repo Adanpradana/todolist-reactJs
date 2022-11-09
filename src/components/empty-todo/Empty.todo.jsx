@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { AppContext } from "../../useContext/app-context";
-import { Skeleton, Spin } from "antd";
 import { Bars } from "react-loader-spinner";
 const EmptyTodo = () => {
   const context = useContext(AppContext);
