@@ -5,9 +5,9 @@ import icon3 from "../../assets/Untitled-3.png";
 
 const Hero = () => {
   return (
-    <div className="container m-auto ">
-      <section>
-        <div className="hero bg-slate-100  md:flex lg:px-10 ">
+    <div className="xxl:container mx-auto">
+      <section className=" bg-red-300 h-screen">
+        <div className="hero  bg-slate-100  md:flex lg:px-10 ">
           <div className="self-center md:text-left px-5 lg:p-0 w-full text-center lg:text-left md:w-1/2">
             <h1 className="text-3xl lg:text-5xl font-semibold text-sky-400 pb-5">Get aligned around your activity everywhere anywhere ✔</h1>
             <p className="leading-relaxed">turn your activity into a source of information instead of a list of frustration</p>
