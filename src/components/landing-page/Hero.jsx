@@ -6,9 +6,9 @@ import icon3 from "../../assets/Untitled-3.png";
 const Hero = () => {
   return (
     <div className="xxl:container mx-auto">
-      <section className="hero h-screen bg-orange-300 lg:flex">
+      <section className="hero h-screen bg-slate-100 lg:flex">
         <div className=" bg-slate-100  lg:self-center lg:px-10 lg:flex ">
-          <div className=" lg:text-left px-5 lg:p-0 lg:self-center text-center lg:bg-red-200 lg:h-1/2 lg:w-1/2">
+          <div className=" lg:text-left px-5 lg:p-0 lg:self-center text-center  lg:h-1/2 lg:w-1/2">
             <h1 className="text-3xl lg:text-5xl font-semibold text-sky-400 pb-5">Get aligned around your activity everywhere anywhere ✔</h1>
             <p className="leading-relaxed">turn your activity into a source of information instead of a list of frustration</p>
             <p className="leading-relaxed">make the timeframe & impact of your goals roadmap</p>
