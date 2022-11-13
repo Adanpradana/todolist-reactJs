@@ -1,10 +1,10 @@
 import Hero from "./Hero";
-// import Navbar from "./Navbar/Navbar";
+import Navbar from "./Navbar/Navbar";
 
 const LandingPage = () => {
   return (
     <section>
-      {/* <Navbar /> */}
+      <Navbar />
       <Hero />
     </section>
   );
