@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 const Navbar = () => {
-  const [dropDown, setDropDown] = useState(false);
-  const [color, setColor] = useState(true);
+  const [dropDown, setDropDown] = useState(true);
+  const [color, setColor] = useState(false);
 
   const scrollHandler = () =>
     window.scrollY > 0 ? setColor(true) : setColor(false);
@@ -29,9 +29,9 @@ const Navbar = () => {
           </button>
           <nav
             className={
-              dropDown
-                ? "hidden"
-                : "absolute right-2 max-w-[220px] w-full bg-white shadow-lg lg:shadow-none top-10 rounded-xl lg:flex lg:static lg:max-w-full lg:bg-transparent"
+              !dropDown
+                ? "absolute right-2 max-w-[220px] w-full bg-white shadow-lg top-10 "
+                : "hidden  lg:shadow-none rounded-xl lg:flex  lg:justify-center lg:items-center lg:static lg:max-w-full lg:bg-transparent"
             }
           >
             <div className="container m-auto text-center py-2 lg:py-0 lg:flex items-center justify-center ">
