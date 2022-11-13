@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const Navbar = () => {
   const [dropDown, setDropDown] = useState(false);
-  const [color, setColor] = useState(false);
+  const [color, setColor] = useState(true);
 
   const scrollHandler = () =>
     window.scrollY > 0 ? setColor(true) : setColor(false);
@@ -22,7 +22,7 @@ const Navbar = () => {
           <div>
             <h1 className="font-semibold">LOOOOGOO</h1>
           </div>
-          <button class="space-y-2 " onClick={dropDownHandler}>
+          <button class="space-y-2 lg:hidden" onClick={dropDownHandler}>
             <div class="w-8 h-0.5 bg-gray-600"></div>
             <div class="w-8 h-0.5 bg-gray-600"></div>
             <div class="w-8 h-0.5 bg-gray-600"></div>
@@ -31,10 +31,10 @@ const Navbar = () => {
             className={
               dropDown
                 ? "hidden"
-                : "absolute right-2  max-w-[220px] w-full bg-white shadow-lg top-10 rounded-xl "
+                : "absolute right-2 max-w-[220px] w-full bg-white shadow-lg lg:shadow-none top-10 rounded-xl lg:flex lg:static lg:max-w-full lg:bg-transparent"
             }
           >
-            <div className="container m-auto text-center py-2">
+            <div className="container m-auto text-center py-2 lg:py-0 lg:flex items-center justify-center ">
               <ul className="py-2 hover:bg-red-200">
                 <li>
                   <button className="">HOME</button>
