@@ -7,8 +7,8 @@ const Hero = () => {
   return (
     <div className="xxl:container mx-auto ">
       <section className="hero h-screen bg-slate-100 lg:flex py-20">
-        <div className=" bg-slate-100  lg:self-center lg:px-10 lg:flex ">
-          <div className=" lg:text-left px-5 lg:p-0 lg:self-center text-center  lg:h-1/2 lg:w-1/2">
+        <div className=" bg-slate-100  lg:self-center sm:px-10 md:px-20 lg:flex ">
+          <div className=" lg:text-left px-5 sm:px-0 lg:self-center text-center  lg:h-1/2 lg:w-1/2">
             <h1 className="text-3xl lg:text-5xl font-semibold text-sky-400 pb-5">
               Get aligned around your activity everywhere anywhere ✔
             </h1>
@@ -33,7 +33,6 @@ const Hero = () => {
               hover:text-neutral-50
               hover:bg-sky-400 
               transition duration-400
-              
               ease-in-out"
               >
                 GET STARTED
