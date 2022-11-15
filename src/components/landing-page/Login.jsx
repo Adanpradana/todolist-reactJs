@@ -1,0 +1,79 @@
+import { useState } from "react";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+
+const Login = () => {
+  const [eye, setEye] = useState("password");
+  const eyeHandler = () => {
+    eye === "name" ? setEye("password") : setEye("name");
+  };
+  return (
+    <div className="xxl:container bg-neutral-400  px-10 m-auto flex justify-center items-center l h-screen ">
+      <div className="container bg-white max-w-lg text-center p-10 rounded-xl ">
+        <div className="pb-5">
+          <h1 className="font-bold text-3xl pb-5">User Login</h1>
+          <p className="leading-relaxed">
+            Create something special today, we help you create new habbit
+          </p>
+        </div>
+        <form action="">
+          <label className="block">
+            <input
+              type="Username"
+              placeholder="Input Username"
+              className="block w-full px-3 py-2 bg-white border
+               border-slate-300 rounded-lg text-sm shadow-sm
+                placeholder-slate-400
+              focus:outline-none focus:border-violet-500 focus:ring-1
+              focus:ring-violet-500 invalid:border-pink-500 invalid:text-pink-600
+              focus:invalid:border-pink-500 focus:invalid:ring-pink-500
+                "
+            />
+          </label>
+          <label className="block pt-3 relative">
+            <input
+              type={eye}
+              placeholder="Password"
+              className="block w-full px-3 py-2 bg-white border
+              border-slate-300 rounded-lg text-sm shadow-sm
+              placeholder-slate-400
+              focus:outline-none focus:border-violet-500 focus:ring-1
+              focus:ring-violet-500 invalid:border-pink-500 invalid:text-pink-600
+              focus:invalid:border-pink-500 focus:invalid:ring-pink-500
+              "
+            />
+            {eye ? (
+              <BsEye
+                className="absolute top-1/2 right-2 cursor-pointer z-10 text-slate-400"
+                onClick={eyeHandler}
+              />
+            ) : (
+              <i>
+                <BsEyeSlash
+                  className="absolute top-1/2 right-2 cursor-pointer z-10 text-slate-400"
+                  onClick={eyeHandler}
+                />
+              </i>
+            )}
+          </label>
+        </form>
+        <div className="pt-3 pb-10">
+          <p className="text-left text-sm hover:text-violet-600 cursor-pointer">
+            having trouble sign in ?
+          </p>
+        </div>
+        <div className="pt-15 bg-violet-500 rounded-md hover:bg-violet-600">
+          <button className="py-3 text-md text-white font-semibold w-full">
+            sign in
+          </button>
+        </div>
+        <div className="pt-4">
+          <p className="text-sm text-gray-700">
+            Don't have account ?
+            <span className="font-bold cursor-pointer">Request now</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+export default Login;
