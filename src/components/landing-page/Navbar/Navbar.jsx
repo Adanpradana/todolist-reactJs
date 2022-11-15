@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [dropDown, setDropDown] = useState(true);
@@ -46,7 +47,11 @@ const Navbar = () => {
             </div>
           </nav>
           <div className="hidden md:flex hover:bg-[#b6b7ee] rounded-md bg-[#AEB0E1] hover:text-slate-100">
-            <button className="py-2 px-6 text-white font-normal">LOGIN</button>
+            <Link to={"/login"}>
+              <button className="py-2 px-6 text-white font-normal">
+                LOGIN
+              </button>
+            </Link>
           </div>
         </div>
       </div>

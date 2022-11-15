@@ -41,7 +41,7 @@ const Login = () => {
               focus:invalid:border-pink-500 focus:invalid:ring-pink-500
               "
             />
-            {eye ? (
+            {eye === "name" ? (
               <BsEye
                 className="absolute top-1/2 right-2 cursor-pointer z-10 text-slate-400"
                 onClick={eyeHandler}
