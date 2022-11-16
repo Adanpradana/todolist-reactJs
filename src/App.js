@@ -17,7 +17,7 @@ function App() {
   const [edit, setEdit] = useState("");
   const [editList, setEditList] = useState({});
   const [showEdit, setShowEdit] = useState(-1);
-
+  const [hover, setHover] = useState(-1);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -85,7 +85,14 @@ function App() {
   const editHandler = (event) => setEdit(event.target.value);
   //end edit handler
 
+  const hoverHandler = (res) => {
+    setHover(res.id);
+  };
+  const hoverleave = () => {
+    setHover(-1);
+  };
   const valueProvider = {
+    hover,
     edit,
     editList,
     name,
@@ -105,6 +112,8 @@ function App() {
     showEditHandler,
     editHandler,
     saveEdit,
+    hoverHandler,
+    hoverleave,
   };
   return (
     <AppContext.Provider value={valueProvider}>

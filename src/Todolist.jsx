@@ -4,9 +4,12 @@ import "./components/index.css";
 import "./components/empty-todo/emptyTodo.css";
 import { BiPlus, BiPencil, BiTrash } from "react-icons/bi";
 import { AppContext } from "./useContext/app-context";
-import { useContext } from "react";
+import { Children, useContext, useState } from "react";
+import EmptyTodo from "./components/Empty";
+
 const Todolist = () => {
   const context = useContext(AppContext);
+  const list = context.list;
 
   return (
     <div className="container bg-slate-50 mx-auto w-full p-8 text-center">
@@ -27,7 +30,7 @@ const Todolist = () => {
         </button>
       </div>
       <div className="pt-10 w-full">
-        <form action="" className="flex">
+        <form action="" className="flex" onSubmit={context.updateUsername}>
           <label htmlFor="" className="w-full">
             <input
               type="todolist"
@@ -51,31 +54,53 @@ const Todolist = () => {
       {/* <Add /> */}
       {/* <Show /> */}
       <div className="pt-20 text-left">
-        <div>
+        <div className="pb-4">
           <h1 className="text-lg">ACTIVITY </h1>
         </div>
-        <div className=" mt-2 rounded-lg bg-gray-100">
-          <div className="flex justify-between px-2">
-            <div className=" flex self-center p-2 gap-3">
-              <div className="flex">
-                <input type="checkbox" name="isodne" id="" />
-              </div>
-              <div className="flex self-center">
-                <p>test</p>
-              </div>
-              <div className="p-2">
-                <i className="text-lg">
-                  <BiPencil />
-                </i>
-              </div>
-            </div>
-            <div className="p-2 rounded-lg bg-red-200 flex self-center">
-              <i className="text-lg text-red-600">
-                <BiTrash />
-              </i>
-            </div>
-          </div>
-        </div>
+        {list.length > 0 ? (
+          Children.toArray(
+            list.map((res) => {
+              return (
+                <div
+                  className=" rounded-md hover:bg-gray-200 "
+                  onMouseEnter={context.hoverHandler.bind(this, res)}
+                  onMouseLeave={context.hoverleave.bind(this, -1)}
+                >
+                  <div className="flex justify-between px-2 h-[50px]">
+                    <div className=" flex self-center p-2 gap-3">
+                      <div className="flex">
+                        <input type="checkbox" name="isdonee" id="" />
+                      </div>
+                      <div className="flex self-center text-gray-700">
+                        <p>{res.name}</p>
+                      </div>
+                      <div
+                        className={
+                          context.hover === res.id
+                            ? "p-2 hover:bg-gray-300 rounded-md"
+                            : "p-2 hover:bg-gray-300  rounded-md hidden"
+                        }
+                      >
+                        <i className="text-xl  text-gray-500">
+                          <BiPencil />
+                        </i>
+                      </div>
+                    </div>
+                    <button onClick={context.removeId.bind(this, res.id)}>
+                      <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
+                        <i className="text-xl text-red-400">
+                          <BiTrash />
+                        </i>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              );
+            })
+          )
+        ) : (
+          <EmptyTodo />
+        )}
       </div>
     </div>
   );
