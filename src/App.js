@@ -55,7 +55,7 @@ function App() {
   const updateUsername = (event) => {
     event.preventDefault();
     if (!name) {
-      return setEerror("isi dlu brok ");
+      return setEerror("todolist cannot be empty !");
     }
     setEerror("");
     const showTodo = [

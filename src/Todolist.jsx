@@ -4,15 +4,17 @@ import "./components/index.css";
 import "./components/empty-todo/emptyTodo.css";
 import { BiPlus, BiPencil, BiTrash } from "react-icons/bi";
 import { AppContext } from "./useContext/app-context";
-import { Children, useContext, useState } from "react";
+import { Children, useContext } from "react";
 import EmptyTodo from "./components/Empty";
+import { Alert } from "./components/Alert";
 
 const Todolist = () => {
   const context = useContext(AppContext);
   const list = context.list;
-
+  const name = context.name;
   return (
-    <div className="container bg-slate-50 mx-auto w-full p-8 text-center">
+    <div className="xxl:container bg-slate-50 mx-auto w-full p-8 text-center xxl:m-0 xxl:w-full">
+      {context.error ? <Alert /> : <></>}
       <div>
         <h1>Hello Name</h1>
         <p>Create your main focus today</p>

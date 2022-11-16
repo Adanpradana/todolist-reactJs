@@ -13,7 +13,13 @@ const Add = () => {
           <label className="label">Username</label>
           <div className="field  has-addons">
             <div className="control is-expanded ">
-              <input type="text" className="input" placeholder="add new user" onChange={context.getValueForm} value={context.name} />
+              <input
+                type="text"
+                className="input"
+                placeholder="add new user"
+                onChange={context.getValueForm}
+                value={context.name}
+              />
             </div>
             <div className="control">
               <button className="button is-info">Submit</button>
