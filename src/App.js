@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [name, setName] = useState("");
   const [list, setList] = useState([]);
-  const [error, setEerror] = useState("");
+  const [error, setEerror] = useState(false);
   const [quotes, setQuotes] = useState("");
   //editState
   const [edit, setEdit] = useState("");
@@ -55,9 +55,14 @@ function App() {
   const updateUsername = (event) => {
     event.preventDefault();
     if (!name) {
-      return setEerror("todolist cannot be empty !");
+      setEerror(true);
+      setTimeout(() => {
+        setEerror(false);
+      }, 500);
+      return;
     }
-    setEerror("");
+    setEerror(false);
+
     const showTodo = [
       ...list,
       {
