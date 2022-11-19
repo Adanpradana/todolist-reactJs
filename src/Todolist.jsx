@@ -7,15 +7,27 @@ import { AppContext } from "./useContext/app-context";
 import { Children, useContext, useState } from "react";
 import EmptyTodo from "./components/Empty";
 import { Alert } from "./components/Alert";
+import alert from "./components/alertData";
 
 const Todolist = () => {
   const context = useContext(AppContext);
   const list = context.list;
-  const [alert, setAlert] = useState(false);
 
   return (
     <div className="xxl:container bg-slate-50 mx-auto w-full p-8 text-center xxl:m-0 xxl:w-full">
-      {context.error && <Alert />}
+      {context.error ? (
+        <Alert
+          color={alert.warning.color}
+          message={alert.warning.message.add}
+          icon={alert.warning.icons}
+        />
+      ) : (
+        <Alert
+          color={alert.warning.color}
+          message="todolist cannot be empty !"
+          icon={alert.warning.icons}
+        />
+      )}
       <div>
         <h1>Hello Name</h1>
         <p>Create your main focus today</p>
