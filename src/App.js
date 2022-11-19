@@ -7,7 +7,7 @@ import Login from "./components/landing-page/Login";
 import { AppContext } from "./useContext/app-context";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import alertData from "./components/alertData";
 function App() {
   const [name, setName] = useState("");
   const [list, setList] = useState([]);
@@ -58,7 +58,7 @@ function App() {
       setEerror(true);
       setTimeout(() => {
         setEerror(false);
-      }, 500);
+      }, 1500);
       return;
     }
     setEerror(false);
@@ -96,6 +96,7 @@ function App() {
   const hoverleave = () => {
     setHover(-1);
   };
+
   const valueProvider = {
     hover,
     edit,
@@ -119,6 +120,7 @@ function App() {
     saveEdit,
     hoverHandler,
     hoverleave,
+    alertData,
   };
   return (
     <AppContext.Provider value={valueProvider}>

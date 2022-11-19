@@ -15,7 +15,7 @@ const Todolist = () => {
 
   return (
     <div className="xxl:container bg-slate-50 mx-auto w-full p-8 text-center xxl:m-0 xxl:w-full">
-      {context.error ? <Alert /> : <></>}
+      {context.error && <Alert />}
       <div>
         <h1>Hello Name</h1>
         <p>Create your main focus today</p>
