@@ -8,6 +8,7 @@ import { Children, useContext, useState } from "react";
 import EmptyTodo from "./components/Empty";
 import { Alert } from "./components/Alert";
 import alert from "./components/alertData";
+import Edit from "./Edit";
 
 const Todolist = () => {
   const context = useContext(AppContext);
@@ -81,34 +82,38 @@ const Todolist = () => {
                   onMouseEnter={context.hoverHandler.bind(this, res)}
                   onMouseLeave={context.hoverleave.bind(this, -1)}
                 >
-                  <div className="flex justify-between px-2 h-[50px]">
-                    <div className=" flex self-center p-2 gap-3">
-                      <div className="flex">
-                        <input type="checkbox" name="isdonee" id="" />
-                      </div>
-                      <div className="flex self-center text-gray-700">
-                        <p>{res.name}</p>
-                      </div>
-                      <div
-                        className={
-                          context.hover === res.id
-                            ? "p-2 hover:bg-gray-300 rounded-md"
-                            : "p-2 hover:bg-gray-300  rounded-md hidden"
-                        }
-                      >
-                        <i className="text-xl  text-gray-500">
-                          <BiPencil />
-                        </i>
-                      </div>
+                  {context.showEdit === res.id ? (
+                    <div className="w-full">
+                      <Edit />
                     </div>
-                    <button onClick={context.removeId.bind(this, res.id)}>
-                      <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
-                        <i className="text-xl text-red-400">
-                          <BiTrash />
-                        </i>
+                  ) : (
+                    <div className="flex  px-2 h-[50px]">
+                      <div className=" flex self-center w-full p-2 gap-3">
+                        <div className="flex self-center  text-gray-700">
+                          <p>{res.name}</p>
+                        </div>
+                        <div
+                          className={
+                            context.hover === res.id
+                              ? "p-2 hover:bg-gray-300 rounded-md cursor-pointer"
+                              : "p-2 hover:bg-gray-300  rounded-md cursor-pointer hidden"
+                          }
+                          onClick={() => context.showEditHandler(res)}
+                        >
+                          <i className="text-xl  text-gray-500">
+                            <BiPencil />
+                          </i>
+                        </div>
                       </div>
-                    </button>
-                  </div>
+                      <button onClick={context.removeId.bind(this, res.id)}>
+                        <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
+                          <i className="text-xl text-red-400">
+                            <BiTrash />
+                          </i>
+                        </div>
+                      </button>
+                    </div>
+                  )}
                 </div>
               );
             })

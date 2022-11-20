@@ -23,7 +23,11 @@ const Show = () => {
                 onMouseLeave={() => {
                   setIsHover(-1);
                 }}
-                className={context.editList ? "control is-expanded flex-edit" : "control is-expanded flex"}
+                className={
+                  context.editList
+                    ? "control is-expanded flex-edit"
+                    : "control is-expanded flex"
+                }
               >
                 <div className="wrapper">
                   <div className="control is-expanded p-control">
@@ -55,7 +59,14 @@ const Show = () => {
                   <div className="control is-expanded p-control">
                     <p>{item.name}</p>
                   </div>
-                  <div className={isHover === item.id ? "button-hover-active" : "button-hover"} onClick={context.showEditHandler.bind(this, item)}>
+                  <div
+                    className={
+                      isHover === item.id
+                        ? "button-hover-active"
+                        : "button-hover"
+                    }
+                    onClick={context.showEditHandler.bind(this, item)}
+                  >
                     <div className="logo-wrapper">
                       <span>
                         <FaEdit />
@@ -65,7 +76,10 @@ const Show = () => {
                 </div>
               </div>
               <div className="control control-button">
-                <button className="button is-danger" onClick={context.removeId.bind(this, item.id)}>
+                <button
+                  className="button is-danger"
+                  onClick={context.removeId.bind(this, item.id)}
+                >
                   delete
                 </button>
               </div>

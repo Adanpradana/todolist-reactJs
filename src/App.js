@@ -82,10 +82,10 @@ function App() {
   const getValueForm = (event) => setName(event.target.value);
 
   //edit handler form
-  const showEditHandler = (item) => {
-    setEdit(item.name);
-    setShowEdit(item.id);
-    setEditList(item);
+  const showEditHandler = (res) => {
+    setEdit(res.name);
+    setShowEdit(res.id);
+    setEditList(res);
   };
   const editHandler = (event) => setEdit(event.target.value);
   //end edit handler
