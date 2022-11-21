@@ -4,11 +4,12 @@ import "./components/index.css";
 import "./components/empty-todo/emptyTodo.css";
 import { BiPlus, BiPencil, BiTrash } from "react-icons/bi";
 import { AppContext } from "./useContext/app-context";
-import { Children, useContext, useState } from "react";
+import React, { Children, useContext, useState } from "react";
 import EmptyTodo from "./components/Empty";
 import { Alert } from "./components/Alert";
 import alert from "./components/alertData";
 import Edit from "./Edit";
+import ReactTooltip from "react-tooltip";
 
 const Todolist = () => {
   const context = useContext(AppContext);
@@ -78,16 +79,27 @@ const Todolist = () => {
             list.map((res) => {
               return (
                 <div
-                  className=" rounded-md hover:bg-gray-200 "
+                  className=" rounded-md hover:bg-violet-50 "
                   onMouseEnter={context.hoverHandler.bind(this, res)}
                   onMouseLeave={context.hoverleave.bind(this, -1)}
                 >
                   {context.showEdit === res.id ? (
-                    <div className="w-full">
+                    <div className="h-[50px] flex px-3">
                       <Edit />
                     </div>
                   ) : (
-                    <div className="flex  px-2 h-[50px]">
+                    <div
+                      data-tip={res.name}
+                      data-for="todolist"
+                      className="flex  px-2 h-[50px] relative"
+                    >
+                      <ReactTooltip
+                        id="todolist"
+                        place="bottom"
+                        effect="solid"
+                        padding="5px"
+                      />
+
                       <div className=" flex self-center w-full p-2 gap-3">
                         <div className="flex self-center  text-gray-700">
                           <p>{res.name}</p>
@@ -95,8 +107,8 @@ const Todolist = () => {
                         <div
                           className={
                             context.hover === res.id
-                              ? "p-2 hover:bg-gray-300 rounded-md cursor-pointer"
-                              : "p-2 hover:bg-gray-300  rounded-md cursor-pointer hidden"
+                              ? "p-2 hover:bg-violet-200 rounded-md cursor-pointer"
+                              : "p-2 hover:bg-violet-200  rounded-md cursor-pointer hidden"
                           }
                           onClick={() => context.showEditHandler(res)}
                         >
@@ -107,7 +119,13 @@ const Todolist = () => {
                       </div>
                       <button onClick={context.removeId.bind(this, res.id)}>
                         <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
-                          <i className="text-xl text-red-400">
+                          <i
+                            className={
+                              context.hover === res.id
+                                ? "text-xl text-red-400"
+                                : "hidden"
+                            }
+                          >
                             <BiTrash />
                           </i>
                         </div>
