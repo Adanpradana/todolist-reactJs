@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
@@ -6,6 +7,31 @@ const Login = () => {
   const eyeHandler = () => {
     eye === "name" ? setEye("password") : setEye("name");
   };
+  const [user_name, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const userNameHandler = (userNameInput) => {
+    setUserName(userNameInput);
+  };
+  const passwordHandler = (passwordInput) => {
+    setPassword(passwordInput);
+  };
+
+  const signInHandler = () => {
+    const dataInput = {
+      user_name,
+      password,
+    };
+    axios({
+      method: "POST",
+      url: "http://localhost:3310/users/login",
+      data: dataInput,
+    }).then((res) => {
+      localStorage.setItem("name", res.data.result.user_name);
+      window.location.replace("/todolist");
+    });
+  };
+
   return (
     <div className="xxl:container bg-neutral-400  px-10 m-auto flex justify-center items-center l h-screen ">
       <div className="container bg-white max-w-lg text-center p-10 rounded-xl ">
@@ -27,12 +53,13 @@ const Login = () => {
               focus:ring-violet-500 invalid:border-pink-500 invalid:text-pink-600
               focus:invalid:border-pink-500 focus:invalid:ring-pink-500
                 "
+              onChange={(event) => userNameHandler(event.target.value)}
             />
           </label>
           <label className="block pt-3 relative">
             <input
               type={eye}
-              placeholder="Password"
+              placeholder="*****"
               className="block w-full px-3 py-2 bg-white border
               border-slate-300 rounded-lg text-sm shadow-sm
               placeholder-slate-400
@@ -40,6 +67,8 @@ const Login = () => {
               focus:ring-violet-500 invalid:border-pink-500 invalid:text-pink-600
               focus:invalid:border-pink-500 focus:invalid:ring-pink-500
               "
+              required
+              onChange={(e) => passwordHandler(e.target.value)}
             />
             {eye === "name" ? (
               <BsEye
@@ -62,7 +91,10 @@ const Login = () => {
           </p>
         </div>
         <div className="pt-15 bg-violet-500 rounded-md hover:bg-violet-600">
-          <button className="py-3 text-md text-white font-semibold w-full">
+          <button
+            className="py-3 text-md text-white font-semibold w-full"
+            onClick={() => signInHandler()}
+          >
             sign in
           </button>
         </div>
