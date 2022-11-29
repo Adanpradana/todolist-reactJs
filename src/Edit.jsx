@@ -1,16 +1,33 @@
+import axios from "axios";
 import { useState } from "react";
 import { useContext } from "react";
 import { BiCheck, BiX } from "react-icons/bi";
 import { AppContext } from "./useContext/app-context";
 
-const Edit = () => {
+const Edit = ({ id, setHandler }) => {
   const context = useContext(AppContext);
   const [edit, setEdit] = useState("");
-  const editHandler = () => {
-    console.log("oke");
+
+  const editHandler = (e) => {
+    e.preventDefault();
+    const getData = {
+      id,
+      todolist: edit,
+      userId: localStorage.getItem("id"),
+    };
+    axios({
+      method: "PUT",
+      url: "http://localhost:3310/users/todolist",
+      data: getData,
+    }).then(() => setHandler(true));
+    context.setShowEdit(!id);
   };
   return (
-    <form action="" className="flex w-full self-center" onSubmit={editHandler}>
+    <form
+      action=""
+      className="flex w-full self-center"
+      onSubmit={(e) => editHandler(e)}
+    >
       <label htmlFor="" className="w-full flex">
         <input
           type="text"
@@ -29,7 +46,7 @@ const Edit = () => {
       <div className="flex pl-3 gap-1">
         <button
           className="bg-violet-400 text-white px-2 rounded-lg text-2xl font-semibold"
-          onClick={editHandler}
+          onClick={(e) => editHandler(e)}
         >
           <BiCheck />
         </button>

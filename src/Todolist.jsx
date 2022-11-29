@@ -72,9 +72,7 @@ const Todolist = () => {
         />
       )}
       <div>
-        {Children.toArray(
-          users.map((user) => <h1>Hello {user?.user_name}</h1>)
-        )}
+        {Children.toArray(users.map((user) => <h1>Hello {user.user_name}</h1>))}
         <p>Create your main focus today</p>
       </div>
       <div>
@@ -126,7 +124,7 @@ const Todolist = () => {
                 >
                   {context.showEdit === res.id ? (
                     <div className="h-[50px] flex px-3">
-                      <Edit />
+                      <Edit id={res.id} setHandler={setHandler} />
                     </div>
                   ) : (
                     <div

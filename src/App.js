@@ -121,6 +121,7 @@ function App() {
     hoverHandler,
     hoverleave,
     alertData,
+    setShowEdit,
   };
   return (
     <AppContext.Provider value={valueProvider}>
