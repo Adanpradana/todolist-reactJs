@@ -23,10 +23,10 @@ const Navbar = () => {
           <div>
             <h1 className="font-semibold">LOOOOGOO</h1>
           </div>
-          <button class="space-y-2 md:hidden" onClick={dropDownHandler}>
-            <div class="w-8 h-0.5 bg-gray-600"></div>
-            <div class="w-8 h-0.5 bg-gray-600"></div>
-            <div class="w-8 h-0.5 bg-gray-600"></div>
+          <button className="space-y-2 md:hidden" onClick={dropDownHandler}>
+            <div className="w-8 h-0.5 bg-gray-600"></div>
+            <div className="w-8 h-0.5 bg-gray-600"></div>
+            <div className="w-8 h-0.5 bg-gray-600"></div>
           </button>
           <nav
             className={

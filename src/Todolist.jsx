@@ -1,20 +1,34 @@
-import Add from "./components/Add.username";
-import Show from "./components/Show.username";
-import "./components/index.css";
-import "./components/empty-todo/emptyTodo.css";
+import React, { Children, useContext, useState } from "react";
 import { BiPlus, BiPencil, BiTrash } from "react-icons/bi";
 import { AppContext } from "./useContext/app-context";
-import React, { Children, useContext, useState } from "react";
-import EmptyTodo from "./components/Empty";
+import { useEffect } from "react";
 import { Alert } from "./components/Alert";
+import ReactTooltip from "react-tooltip";
+import EmptyTodo from "./components/Empty";
 import alert from "./components/alertData";
 import Edit from "./Edit";
-import ReactTooltip from "react-tooltip";
+import "./components/index.css";
+import "./components/empty-todo/emptyTodo.css";
+import { Outlet } from "react-router-dom";
+import NotFound from "./components/NotFound";
+import axios from "axios";
 
 const Todolist = () => {
   const context = useContext(AppContext);
   const list = context.list;
 
+  const [user, setUsers] = useState([]);
+
+  useEffect(() => {
+    // if (!localStorage.getItem("name") && !localStorage.getItem("uuid")) {
+    //   window.location.replace(<Outlet />);
+    // }
+    const nameStore = localStorage.getItem("name");
+    axios({
+      method: "GET",
+      url: `http://localhost:3310/users/${nameStore}/todolist`,
+    }).then((res) => console.log(res.data.users));
+  }, []);
   return (
     <div className="xxl:container bg-slate-50 mx-auto w-full p-8 text-center xxl:m-0 xxl:w-full">
       {context.error ? (
@@ -31,7 +45,7 @@ const Todolist = () => {
         />
       )}
       <div>
-        <h1>Hello Name</h1>
+        <h1>Hello</h1>
         <p>Create your main focus today</p>
       </div>
       <div>

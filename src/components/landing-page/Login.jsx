@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [eye, setEye] = useState("password");
@@ -17,6 +18,7 @@ const Login = () => {
     setPassword(passwordInput);
   };
 
+  const navigate = useNavigate();
   const signInHandler = () => {
     const dataInput = {
       user_name,
@@ -28,7 +30,8 @@ const Login = () => {
       data: dataInput,
     }).then((res) => {
       localStorage.setItem("name", res.data.result.user_name);
-      window.location.replace("/todolist");
+      localStorage.setItem("uuid", res.data.result.uuid);
+      navigate("/todolist");
     });
   };
 
