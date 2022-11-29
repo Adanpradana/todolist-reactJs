@@ -17,7 +17,8 @@ const Todolist = () => {
   const context = useContext(AppContext);
   const list = context.list;
 
-  const [user, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [todolists, setTodolists] = useState([]);
 
   useEffect(() => {
     // if (!localStorage.getItem("name") && !localStorage.getItem("uuid")) {
@@ -27,7 +28,11 @@ const Todolist = () => {
     axios({
       method: "GET",
       url: `http://localhost:3310/users/${nameStore}/todolist`,
-    }).then((res) => console.log(res.data.users));
+    }).then((res) => setUsers(res.data.users));
+    axios({
+      method: "GET",
+      url: `http://localhost:3310/users/${nameStore}/todolist`,
+    }).then((res) => setTodolists(res.data.users[0].todolist));
   }, []);
   return (
     <div className="xxl:container bg-slate-50 mx-auto w-full p-8 text-center xxl:m-0 xxl:w-full">
@@ -45,7 +50,7 @@ const Todolist = () => {
         />
       )}
       <div>
-        <h1>Hello</h1>
+        {Children.toArray(users.map((user) => <h1>Hello {user.user_name}</h1>))}
         <p>Create your main focus today</p>
       </div>
       <div>
@@ -82,8 +87,6 @@ const Todolist = () => {
           </button>
         </form>
       </div>
-      {/* <Add /> */}
-      {/* <Show /> */}
       <div className="pt-20 text-left">
         <div className="pb-4">
           <h1 className="text-lg">ACTIVITY </h1>
