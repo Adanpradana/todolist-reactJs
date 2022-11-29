@@ -1,7 +1,6 @@
-import React, { Children, useContext, useState } from "react";
+import React, { Children, useContext, useState, useEffect } from "react";
 import { BiPlus, BiPencil, BiTrash } from "react-icons/bi";
 import { AppContext } from "./useContext/app-context";
-import { useEffect } from "react";
 import { Alert } from "./components/Alert";
 import ReactTooltip from "react-tooltip";
 import EmptyTodo from "./components/Empty";
@@ -19,12 +18,15 @@ const Todolist = () => {
 
   const [users, setUsers] = useState([]);
   const [todolists, setTodolists] = useState([]);
-
+  const [newTodo, setNewTodo] = useState("");
+  const [handler, setHandler] = useState(false);
+  const [notif, setNotif] = useState(false);
   useEffect(() => {
     // if (!localStorage.getItem("name") && !localStorage.getItem("uuid")) {
     //   window.location.replace(<Outlet />);
     // }
     const nameStore = localStorage.getItem("name");
+
     axios({
       method: "GET",
       url: `http://localhost:3310/users/${nameStore}/todolist`,
@@ -33,7 +35,27 @@ const Todolist = () => {
       method: "GET",
       url: `http://localhost:3310/users/${nameStore}/todolist`,
     }).then((res) => setTodolists(res.data.users[0].todolist));
-  }, []);
+  }, [handler]);
+
+  const addHandler = (e) => {
+    setNewTodo(e.target.value);
+  };
+
+  const idStore = localStorage.getItem("id");
+  const addTodo = (e) => {
+    e.preventDefault();
+    const addData = {
+      todolist: newTodo,
+      userId: idStore,
+    };
+
+    axios({
+      method: "POST",
+      url: "http://localhost:3310/users/todolist",
+      data: addData,
+    }).then(() => setHandler(!handler));
+    setNewTodo("");
+  };
   return (
     <div className="xxl:container bg-slate-50 mx-auto w-full p-8 text-center xxl:m-0 xxl:w-full">
       {context.error ? (
@@ -50,7 +72,9 @@ const Todolist = () => {
         />
       )}
       <div>
-        {Children.toArray(users.map((user) => <h1>Hello {user.user_name}</h1>))}
+        {Children.toArray(
+          users.map((user) => <h1>Hello {user?.user_name}</h1>)
+        )}
         <p>Create your main focus today</p>
       </div>
       <div>
@@ -66,7 +90,7 @@ const Todolist = () => {
         </button>
       </div>
       <div className="pt-10 w-full">
-        <form action="" className="flex" onSubmit={context.updateUsername}>
+        <form action="" className="flex" onSubmit={(e) => addTodo(e)}>
           <label htmlFor="" className="w-full">
             <input
               type="todolist"
@@ -78,8 +102,8 @@ const Todolist = () => {
               focus:ring-violet-500 invalid:border-pink-500 invalid:text-pink-600
               focus:invalid:border-pink-500 focus:invalid:ring-pink-500
               "
-              onChange={context.getValueForm}
-              value={context.name}
+              onChange={(e) => addHandler(e)}
+              value={newTodo}
             />
           </label>
           <button className="bg-violet-400 text-white px-4 rounded-r-lg">
@@ -91,9 +115,9 @@ const Todolist = () => {
         <div className="pb-4">
           <h1 className="text-lg">ACTIVITY </h1>
         </div>
-        {list.length > 0 ? (
+        {todolists.length > 0 ? (
           Children.toArray(
-            list.map((res) => {
+            todolists.map((res) => {
               return (
                 <div
                   className=" rounded-md hover:bg-violet-50 "
@@ -119,7 +143,7 @@ const Todolist = () => {
 
                       <div className=" flex self-center w-full p-2 gap-3">
                         <div className="flex self-center  text-gray-700">
-                          <p>{res.name}</p>
+                          <p>{res.todolist}</p>
                         </div>
                         <div
                           className={

@@ -1,15 +1,16 @@
+import { useState } from "react";
 import { useContext } from "react";
 import { BiCheck, BiX } from "react-icons/bi";
 import { AppContext } from "./useContext/app-context";
 
 const Edit = () => {
   const context = useContext(AppContext);
+  const [edit, setEdit] = useState("");
+  const editHandler = () => {
+    console.log("oke");
+  };
   return (
-    <form
-      action=""
-      className="flex w-full self-center"
-      onSubmit={context.updateUsername}
-    >
+    <form action="" className="flex w-full self-center" onSubmit={editHandler}>
       <label htmlFor="" className="w-full flex">
         <input
           type="text"
@@ -21,14 +22,14 @@ const Edit = () => {
         focus:ring-violet-500 invalid:border-pink-500 invalid:text-pink-600
         focus:invalid:border-pink-500 focus:invalid:ring-pink-500
         "
-          onChange={context.editHandler}
-          value={context.edit}
+          onChange={(e) => setEdit(e.target.value)}
+          value={edit}
         />
       </label>
       <div className="flex pl-3 gap-1">
         <button
           className="bg-violet-400 text-white px-2 rounded-lg text-2xl font-semibold"
-          onClick={context.saveEdit}
+          onClick={editHandler}
         >
           <BiCheck />
         </button>

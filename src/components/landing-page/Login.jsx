@@ -30,7 +30,7 @@ const Login = () => {
       data: dataInput,
     }).then((res) => {
       localStorage.setItem("name", res.data.result.user_name);
-      localStorage.setItem("uuid", res.data.result.uuid);
+      localStorage.setItem("id", res.data.result.id);
       navigate("/todolist");
     });
   };
