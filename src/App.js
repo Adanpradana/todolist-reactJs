@@ -80,7 +80,6 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
-  // const getId = () => todolists.map((todo, i) => todo.id);
   const saveEdit = (e) => {
     e.preventDefault();
     const getData = {
@@ -97,10 +96,10 @@ function App() {
     setEdit("");
   };
 
-  const cancelEdit = () => {
-    setEditList({});
+  const cancelEdit = (e) => {
+    e.preventDefault();
     setEdit("");
-    setShowEdit(showEdit !== editList.id);
+    setShowEdit(showEdit !== showEdit.id);
   };
 
   //edit handler form
@@ -118,26 +117,21 @@ function App() {
 
   const valueProvider = {
     hover,
-    edit,
-    editList,
-
-    error,
-
-    showEdit,
-    quotes,
-    loading,
-    cancelEdit,
-
-    setEdit,
-    setEditList,
-    showEditHandler,
-
-    saveEdit,
     hoverHandler,
     hoverleave,
-    alertData,
+    edit,
+    setEdit,
+    editList,
+    setEditList,
+    showEdit,
     setShowEdit,
-
+    cancelEdit,
+    saveEdit,
+    alertData,
+    showEditHandler,
+    error,
+    quotes,
+    loading,
     //database handler
     users,
     addTodo,

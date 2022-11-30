@@ -1,5 +1,3 @@
-import axios from "axios";
-import { useState } from "react";
 import { useContext } from "react";
 import { BiCheck, BiX } from "react-icons/bi";
 import { AppContext } from "./useContext/app-context";
@@ -29,15 +27,12 @@ const Edit = () => {
         />
       </label>
       <div className="flex pl-3 gap-1">
-        <button
-          className="bg-violet-400 text-white px-2 rounded-lg text-2xl font-semibold"
-          // onClick={(e) => editHandler(e)}
-        >
+        <button className="bg-violet-400 text-white px-2 rounded-lg text-2xl font-semibold">
           <BiCheck />
         </button>
         <button
           className="bg-red-400 text-white px-2 rounded-lg text-2xl font-semibold"
-          onClick={context.cancelEdit}
+          onClick={(e) => context.cancelEdit(e)}
         >
           <BiX />
         </button>
