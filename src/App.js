@@ -17,7 +17,7 @@ function App() {
   const [showEdit, setShowEdit] = useState(-1);
   const [hover, setHover] = useState(-1);
   const [loading, setLoading] = useState(true);
-  const [idTodo, setIdTodo] = useState();
+
   //database handling state
   const [users, setUsers] = useState([]);
   const [todolists, setTodolists] = useState([]);
@@ -80,10 +80,11 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
-  const saveEdit = (event) => {
-    event.preventDefault();
+  // const getId = () => todolists.map((todo, i) => todo.id);
+  const saveEdit = (e) => {
+    e.preventDefault();
     const getData = {
-      id,
+      id: showEdit,
       todolist: edit,
       userId: localStorage.getItem("id"),
     };
@@ -93,6 +94,7 @@ function App() {
       data: getData,
     }).then(() => setHandler(!handler));
     setShowEdit(-1);
+    setEdit("");
   };
 
   const cancelEdit = () => {
@@ -103,12 +105,9 @@ function App() {
 
   //edit handler form
   const showEditHandler = (res) => {
-    setEdit(res.name);
+    setEdit(res.todolist);
     setShowEdit(res.id);
-    setEditList(res);
   };
-  const editHandler = (event) => setEdit(event.target.value);
-  //end edit handler
 
   const hoverHandler = (res) => {
     setHover(res.id);
@@ -132,7 +131,7 @@ function App() {
     setEdit,
     setEditList,
     showEditHandler,
-    editHandler,
+
     saveEdit,
     hoverHandler,
     hoverleave,

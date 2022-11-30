@@ -11,7 +11,7 @@ const Edit = () => {
     <form
       action=""
       className="flex w-full self-center"
-      onSubmit={(e) => context.editHandler(e)}
+      onSubmit={(e) => context.saveEdit(e)}
     >
       <label htmlFor="" className="w-full flex">
         <input
