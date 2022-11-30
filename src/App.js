@@ -11,14 +11,10 @@ import "./components/empty-todo/emptyTodo.css";
 function App() {
   const [error, setEerror] = useState(false);
   const [quotes, setQuotes] = useState("");
-  //editState
   const [edit, setEdit] = useState("");
-  const [editList, setEditList] = useState({});
   const [showEdit, setShowEdit] = useState(-1);
   const [hover, setHover] = useState(-1);
   const [loading, setLoading] = useState(true);
-
-  //database handling state
   const [users, setUsers] = useState([]);
   const [todolists, setTodolists] = useState([]);
   const [newTodo, setNewTodo] = useState("");
@@ -85,7 +81,7 @@ function App() {
     const getData = {
       id: showEdit,
       todolist: edit,
-      userId: localStorage.getItem("id"),
+      userId: idStore,
     };
     axios({
       method: "PUT",
@@ -102,10 +98,22 @@ function App() {
     setShowEdit(showEdit !== showEdit.id);
   };
 
-  //edit handler form
   const showEditHandler = (res) => {
     setEdit(res.todolist);
     setShowEdit(res.id);
+  };
+
+  const removeTodoList = (e) => {
+    e.preventDefault();
+    const data = {
+      id: 
+      userId: idStore,
+    };
+    axios({
+      method: "DELETE",
+      url: "http://localhost:3310/users/todolist",
+      data: data,
+    }).then(() => setHandler(!handler));
   };
 
   const hoverHandler = (res) => {
@@ -121,8 +129,6 @@ function App() {
     hoverleave,
     edit,
     setEdit,
-    editList,
-    setEditList,
     showEdit,
     setShowEdit,
     cancelEdit,
@@ -139,6 +145,7 @@ function App() {
     newTodo,
     todolists,
     setHandler,
+    removeTodoList,
   };
   return (
     <AppContext.Provider value={valueProvider}>
