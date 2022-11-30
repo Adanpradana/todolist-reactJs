@@ -103,10 +103,10 @@ function App() {
     setShowEdit(res.id);
   };
 
-  const removeTodoList = (e) => {
+  const removeTodoList = (res, e) => {
     e.preventDefault();
     const data = {
-      id: 
+      id: res.id,
       userId: idStore,
     };
     axios({

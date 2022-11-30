@@ -115,11 +115,8 @@ const Todolist = () => {
                           </i>
                         </div>
                       </div>
-                      <button>
-                        <div
-                          className="p-2 rounded-md hover:bg-red-200 flex self-center"
-                          onClick={(e) => context.removeTodoList(e)}
-                        >
+                      <button onClick={(e) => context.removeTodoList(res, e)}>
+                        <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
                           <i
                             className={
                               context.hover === res.id
