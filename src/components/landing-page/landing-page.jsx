@@ -5,7 +5,7 @@ import Navbar from "./Navbar/Navbar";
 
 const LandingPage = () => {
   useEffect(() => {
-    if (localStorage.getItem("name") && localStorage.getItem("uuid")) {
+    if (localStorage.getItem("name") && localStorage.getItem("id")) {
       window.location.replace(<NotFound />);
     }
   }, []);
