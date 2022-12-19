@@ -123,6 +123,8 @@ const Todolist = () => {
     cancelEdit,
     setEdit,
     edit,
+    error,
+    setEerror,
   };
   return (
     <AppContext.Provider value={valueProvider}>

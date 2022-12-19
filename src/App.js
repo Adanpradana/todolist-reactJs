@@ -3,11 +3,13 @@ import { Routes, Route, Outlet, useNavigate } from "react-router-dom";
 import { AppContext } from "./useContext/app-context";
 import LandingPage from "./components/landing-page/landing-page";
 import alertData from "./components/alertData";
+import Register from "./components/Register";
 import Todolist from "./Todolist";
 import Login from "./components/landing-page/Login";
 import axios from "axios";
 import "./components/index.css";
 import "./components/empty-todo/emptyTodo.css";
+
 function App() {
   const [error, setEerror] = useState(false);
   const [quotes, setQuotes] = useState("");
@@ -31,6 +33,7 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
       <Route path="todolist" element={<Todolist />} />
     </Routes>
   );

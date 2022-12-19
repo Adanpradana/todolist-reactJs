@@ -14,12 +14,12 @@ const Navbar = () => {
     <header
       className={
         color
-          ? "navbar-fixed fixed top-0 w-full bg-opacity-70 z-10  h-fit "
-          : "fixed top-0 w-full bg-transparent z-50 h-fit"
+          ? "navbar-fixed fixed top-0 w-full bg-opacity-70 z-10 py-5 md:py-0"
+          : "fixed top-0 w-full bg-transparent z-50 py-5 md:py-0"
       }
     >
-      <div className="m-auto  relative ">
-        <div className="flex justify-between items-center  px-5 md:h-fit sm:px-10 md:px-20 w-full">
+      <div className="m-auto relative ">
+        <div className="flex justify-between items-center px-5 sm:px-20 w-full">
           <div>
             <h1 className="font-semibold">LOOOOGOO</h1>
           </div>
@@ -32,10 +32,10 @@ const Navbar = () => {
             className={
               !dropDown
                 ? "absolute right-2 max-w-[220px] w-full bg-white shadow-lg top-10 "
-                : "hidden  md:shadow-none rounded-xl md:flex md:justify-center md:items-center md:static md:max-w-full md:bg-transparent"
+                : "hidden md:shadow-none rounded-xl md:flex md:justify-center md:items-center md:static md:max-w-full md:bg-transparent"
             }
           >
-            <div className="container mx-auto text-center py-2 md:flex md:py-0">
+            <div className="container mx-auto text-center md:flex ">
               <ul className="md:flex md:gap-10">
                 <li className="py-3 md:py-5 md:flex md:border-b-2 md:border-b-transparent hover:border-blue-400 hover:text-blue-400">
                   <button className="">HOME</button>
