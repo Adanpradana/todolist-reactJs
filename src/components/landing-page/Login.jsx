@@ -2,8 +2,9 @@ import axios from "axios";
 import { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { Alert } from "../Alert";
-import alert from "../alertData";
+import { ThreeDots } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Login = () => {
   const [eye, setEye] = useState("password");
   const eyeHandler = () => {
@@ -12,8 +13,10 @@ const Login = () => {
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [success, setSuccess] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
 
   const userNameHandler = (userNameInput) => {
     setUserName(userNameInput);
@@ -23,7 +26,8 @@ const Login = () => {
   };
 
   const navigate = useNavigate();
-  const signInHandler = () => {
+  const signInHandler = (e) => {
+    e.preventDefault();
     const dataInput = {
       user_name,
       password,
@@ -34,25 +38,61 @@ const Login = () => {
       data: dataInput,
     })
       .then((res) => {
+        setSuccess(res.data.message);
         localStorage.setItem("name", res.data.result.user_name);
         localStorage.setItem("id", res.data.result.id);
-        navigate("/todolist");
+        if (res) {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          navigate("/todolist");
+        }
       })
-      .catch((error) => setErrorMsg(error.response.data.message))
-      .catch(() => setError(true))
+      .catch((error) =>
+        toast.error(error.response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      )
       .finally(() => setLoading(true));
   };
   return (
     <div className="xxl:container bg-neutral-400  px-10 m-auto flex justify-center items-center l h-screen ">
+      <div>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </div>
       <div className="container bg-white max-w-lg text-center p-10 rounded-xl ">
         <div className="pb-5">
-          {error ? errorMsg : null}
           <h1 className="font-bold text-3xl pb-5">User Login</h1>
           <p className="leading-relaxed">
             Create something special today, we help you create new habbit
           </p>
         </div>
-        <form action="">
+        <form action="" onSubmit={(e) => signInHandler(e)}>
           <label className="block">
             <input
               type="Username"
@@ -92,20 +132,30 @@ const Login = () => {
               </i>
             )}
           </label>
+          <div className="pt-3 pb-10">
+            <p className="text-left text-sm hover:text-violet-600 cursor-pointer">
+              having trouble sign in ?
+            </p>
+          </div>
+          <div className="pt-15  flex-col items-center justify-center">
+            {user_name === "" || password === "" ? (
+              <button
+                disabled
+                type="submit"
+                className="py-3 text-md disabled:text-slate-400   font-semibold w-full disabled:bg-slate-300 rounded-lg "
+              >
+                sign in
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="py-3 text-md text-white bg-violet-600 hover:bg-violet-400 font-semibold w-full rounded-lg "
+              >
+                sign in
+              </button>
+            )}
+          </div>
         </form>
-        <div className="pt-3 pb-10">
-          <p className="text-left text-sm hover:text-violet-600 cursor-pointer">
-            having trouble sign in ?
-          </p>
-        </div>
-        <div className="pt-15 bg-violet-500 rounded-md hover:bg-violet-600">
-          <button
-            className="py-3 text-md text-white font-semibold w-full"
-            onClick={() => signInHandler()}
-          >
-            sign in
-          </button>
-        </div>
         <div className="pt-4">
           <p className="text-sm text-gray-700">
             Don't have account ?

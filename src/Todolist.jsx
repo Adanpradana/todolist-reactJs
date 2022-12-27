@@ -11,6 +11,8 @@ import axios from "axios";
 import Edit from "./Edit";
 import "./components/index.css";
 import "./components/empty-todo/emptyTodo.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Todolist = () => {
   const context = useContext(AppContext);
@@ -24,7 +26,7 @@ const Todolist = () => {
   const idStore = localStorage.getItem("id");
   const [edit, setEdit] = useState("");
   const [showEdit, setShowEdit] = useState(-1);
-
+ 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,13 +51,19 @@ const Todolist = () => {
   const addTodo = (e) => {
     e.preventDefault();
     if (!newTodo) {
-      setEerror(true);
-      setTimeout(() => {
-        setEerror(false);
-      }, 1500);
+      toast.error("todolist cannot be empty !", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       return;
     }
-    setEerror(false);
+
     const addData = {
       todolist: newTodo,
       userId: idStore,
@@ -118,6 +126,7 @@ const Todolist = () => {
       .then(() => setHandler(!handler))
       .then(() => setHover(!res.id));
   };
+
   const valueProvider = {
     saveEdit,
     cancelEdit,
@@ -129,20 +138,21 @@ const Todolist = () => {
   return (
     <AppContext.Provider value={valueProvider}>
       <div className="xxl:container bg-slate-50 mx-auto w-full text-center xxl:m-0 xxl:w-full">
-        {error ? (
-          <Alert
-            color={alert.warning.color}
-            message={alert.warning.message.add}
-            icon={alert.warning.icons}
+        <div>
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
           />
-        ) : (
-          <Alert
-            color={alert.warning.color}
-            message="todolist cannot be empty !"
-            icon={alert.warning.icons}
-          />
-        )}
-        <div className="bg-red-200 flex px-10 md:px-20 justify-between">
+        </div>
+        <nav className="bg-red-200 flex px-10 md:px-20 justify-between">
           <div className="flex self-center gap-2">
             <div className="flex self-center">
               <span>
@@ -167,7 +177,7 @@ const Todolist = () => {
               </button>
             </div>
           </div>
-        </div>
+        </nav>
         <div className="py-10">
           <p className="text-4xl">Create your main focus today</p>
         </div>
@@ -183,7 +193,7 @@ const Todolist = () => {
             </div>
           </button>
         </div>
-        <div className="pt-10 w-full">
+        <div className="pt-10 w-full px-10">
           <form action="" className="flex" onSubmit={(e) => addTodo(e)}>
             <label htmlFor="" className="w-full">
               <input
@@ -205,7 +215,7 @@ const Todolist = () => {
             </button>
           </form>
         </div>
-        <div className="pt-20 text-left">
+        <div className="pt-20 text-left px-10">
           <div className="pb-4">
             <h1 className="text-lg">ACTIVITY</h1>
           </div>
