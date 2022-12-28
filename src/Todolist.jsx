@@ -26,7 +26,7 @@ const Todolist = () => {
   const idStore = localStorage.getItem("id");
   const [edit, setEdit] = useState("");
   const [showEdit, setShowEdit] = useState(-1);
- 
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -152,7 +152,7 @@ const Todolist = () => {
             theme="light"
           />
         </div>
-        <nav className="bg-red-200 flex px-10 md:px-20 justify-between">
+        <nav className="bg-red-200 flex px-10  justify-between">
           <div className="flex self-center gap-2">
             <div className="flex self-center">
               <span>
@@ -178,11 +178,11 @@ const Todolist = () => {
             </div>
           </div>
         </nav>
-        <div className="py-10">
+        <div className="py-10 px-[40px]">
           <p className="text-4xl">Create your main focus today</p>
         </div>
         <div>
-          <button className="py-2 px-4 bg-violet-400 rpunded-md">
+          <button className="py-2 px-4 bg-violet-400 rounded-md">
             <div className="flex text-white">
               <div className="flex items-center">
                 <BiPlus className="" />
@@ -215,75 +215,78 @@ const Todolist = () => {
             </button>
           </form>
         </div>
-        <div className="pt-20 text-left px-10">
+        <div className="pt-20 text-left px-10 ">
           <div className="pb-4">
-            <h1 className="text-lg">ACTIVITY</h1>
+            <h1 className="text-lg text-center">ACTIVITY</h1>
           </div>
-          {todolists.length > 0 ? (
-            Children.toArray(
-              todolists.map((res) => {
-                return (
-                  <div
-                    className=" rounded-md hover:bg-violet-50 "
-                    onMouseEnter={() => hoverHandler(res)}
-                    onMouseLeave={() => hoverleave(-1)}
-                  >
-                    {showEdit === res.id ? (
-                      <div className="h-[50px] flex px-3">
-                        <Edit />
-                      </div>
-                    ) : (
-                      <div
-                        data-tip={res.name}
-                        data-for="todolist"
-                        className="flex  px-2 h-[50px] relative"
-                      >
-                        <ReactTooltip
-                          id="todolist"
-                          place="bottom"
-                          effect="solid"
-                          padding="5px"
-                        />
 
-                        <div className=" flex self-center w-full p-2 gap-3">
-                          <div className="flex self-center  text-gray-700">
-                            <p>{res.todolist}</p>
-                          </div>
-                          <div
-                            className={
-                              hover === res.id
-                                ? "p-2 hover:bg-violet-200 rounded-md cursor-pointer"
-                                : "p-2 hover:bg-violet-200  rounded-md cursor-pointer hidden"
-                            }
-                            onClick={() => showEditHandler(res)}
-                          >
-                            <i className="text-xl  text-gray-500">
-                              <BiPencil />
-                            </i>
-                          </div>
+          <div className="border border-slate-400 rounded-md overflow-hidden">
+            {todolists.length > 0 ? (
+              Children.toArray(
+                todolists.map((res) => {
+                  return (
+                    <div
+                      className=" hover:bg-violet-50 border-b-2 last:border-none px-[5px]"
+                      onMouseEnter={() => hoverHandler(res)}
+                      onMouseLeave={() => hoverleave(-1)}
+                    >
+                      {showEdit === res.id ? (
+                        <div className="h-[50px] flex px-3">
+                          <Edit />
                         </div>
-                        <button onClick={(e) => removeTodoList(res, e)}>
-                          <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
-                            <i
+                      ) : (
+                        <div
+                          data-tip={res.name}
+                          data-for="todolist"
+                          className="flex  px-2 h-[50px] relative"
+                        >
+                          <ReactTooltip
+                            id="todolist"
+                            place="bottom"
+                            effect="solid"
+                            padding="5px"
+                          />
+
+                          <div className=" flex self-center w-full p-2 gap-3">
+                            <div className="flex self-center  text-gray-700">
+                              <p>{res.todolist}</p>
+                            </div>
+                            <div
                               className={
                                 hover === res.id
-                                  ? "text-xl text-red-400"
-                                  : "hidden"
+                                  ? "p-2 hover:bg-violet-200 rounded-md cursor-pointer"
+                                  : "p-2 hover:bg-violet-200  rounded-md cursor-pointer hidden"
                               }
+                              onClick={() => showEditHandler(res)}
                             >
-                              <BiTrash />
-                            </i>
+                              <i className="text-xl  text-gray-500">
+                                <BiPencil />
+                              </i>
+                            </div>
                           </div>
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                );
-              })
-            )
-          ) : (
-            <EmptyTodo />
-          )}
+                          <button onClick={(e) => removeTodoList(res, e)}>
+                            <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
+                              <i
+                                className={
+                                  hover === res.id
+                                    ? "text-xl text-red-400"
+                                    : "hidden"
+                                }
+                              >
+                                <BiTrash />
+                              </i>
+                            </div>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              )
+            ) : (
+              <EmptyTodo />
+            )}
+          </div>
         </div>
       </div>
     </AppContext.Provider>

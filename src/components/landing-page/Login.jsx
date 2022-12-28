@@ -138,7 +138,7 @@ const Login = () => {
             </p>
           </div>
           <div className="pt-15  flex-col items-center justify-center">
-            {user_name === "" || password === "" ? (
+            {user_name === "" && password === "" ? (
               <button
                 disabled
                 type="submit"

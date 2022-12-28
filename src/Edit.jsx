@@ -16,7 +16,7 @@ const Edit = () => {
           type="text"
           placeholder="Edit todo.."
           className=" w-full px-3 py-2 bg-white border
-         border-slate-300 rounded-l-lg text-sm shadow-sm
+         border-slate-300 rounded-lg text-sm shadow-sm
           placeholder-slate-400
         focus:outline-none focus:border-violet-500 focus:ring-1
         focus:ring-violet-500 invalid:border-pink-500 invalid:text-pink-600
