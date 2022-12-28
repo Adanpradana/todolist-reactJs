@@ -13,6 +13,7 @@ import "./components/index.css";
 import "./components/empty-todo/emptyTodo.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "animate.css";
 
 const Todolist = () => {
   const context = useContext(AppContext);
@@ -26,6 +27,7 @@ const Todolist = () => {
   const idStore = localStorage.getItem("id");
   const [edit, setEdit] = useState("");
   const [showEdit, setShowEdit] = useState(-1);
+  const [showFormCreate, setShowFormCreate] = useState(false);
 
   const navigate = useNavigate();
 
@@ -63,6 +65,7 @@ const Todolist = () => {
       });
       return;
     }
+    setShowFormCreate(false);
 
     const addData = {
       todolist: newTodo,
@@ -126,6 +129,10 @@ const Todolist = () => {
       .then(() => setHandler(!handler))
       .then(() => setHover(!res.id));
   };
+  const showAddTaskHandler = (e) => {
+    e.preventDefault();
+    setShowFormCreate(true);
+  };
 
   const valueProvider = {
     saveEdit,
@@ -178,12 +185,21 @@ const Todolist = () => {
             </div>
           </div>
         </nav>
-        <div className="py-10 px-[40px]">
+        <div className="py-5 px-[20px]">
           <p className="text-4xl">Create your main focus today</p>
         </div>
-        <div>
-          <button className="py-2 px-4 bg-violet-400 rounded-md">
-            <div className="flex text-white">
+        <div className="pb-6">
+          <button
+            className={
+              showFormCreate
+                ? "py-2 px-4 bg-violet-400 rounded-md invisible"
+                : "py-2 px-4 bg-violet-400 rounded-md"
+            }
+          >
+            <div
+              onClick={(e) => showAddTaskHandler(e)}
+              className="flex text-white cursor-pointer"
+            >
               <div className="flex items-center">
                 <BiPlus className="" />
               </div>
@@ -193,34 +209,37 @@ const Todolist = () => {
             </div>
           </button>
         </div>
-        <div className="pt-10 w-full px-10">
-          <form action="" className="flex" onSubmit={(e) => addTodo(e)}>
-            <label htmlFor="" className="w-full">
-              <input
-                type="todolist"
-                placeholder="what will you do"
-                className=" w-full px-3 py-2 bg-white border
+        {showFormCreate && (
+          <div className=" w-full px-10">
+            <form action="" className="flex" onSubmit={(e) => addTodo(e)}>
+              <label htmlFor="" className="w-full">
+                <input
+                  type="todolist"
+                  placeholder="what will you do"
+                  className=" w-full px-3 py-2 bg-white border
                border-slate-300 rounded-l-lg text-sm shadow-sm
                 placeholder-slate-400
               focus:outline-none focus:border-violet-500 focus:ring-1
               focus:ring-violet-500 invalid:border-pink-500 invalid:text-pink-600
               focus:invalid:border-pink-500 focus:invalid:ring-pink-500
               "
-                onChange={(e) => addHandler(e)}
-                value={newTodo}
-              />
-            </label>
-            <button className="bg-violet-400 text-white px-4 rounded-r-lg">
-              create
-            </button>
-          </form>
-        </div>
+                  onChange={(e) => addHandler(e)}
+                  value={newTodo}
+                />
+              </label>
+              <button className="bg-violet-400 text-white px-4 rounded-r-lg">
+                create
+              </button>
+            </form>
+          </div>
+        )}
+
         <div className="pt-20 text-left px-10 ">
           <div className="pb-4">
             <h1 className="text-lg text-center">ACTIVITY</h1>
           </div>
 
-          <div className="border border-slate-400 rounded-md overflow-hidden">
+          <div className="border border-slate-400 rounded-md overflow-hidden mb-8">
             {todolists.length > 0 ? (
               Children.toArray(
                 todolists.map((res) => {
