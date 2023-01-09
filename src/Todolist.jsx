@@ -38,11 +38,11 @@ const Todolist = () => {
     const nameStore = localStorage.getItem("name");
     axios({
       method: "GET",
-      url: `http://localhost:3310/users/${nameStore}/todolist`,
+      url: `${process.env.REACT_APP_BASEURL}/users/${nameStore}/todolist`,
     }).then((res) => setUsers(res.data.users));
     axios({
       method: "GET",
-      url: `http://localhost:3310/users/${nameStore}/todolist`,
+      url: `${process.env.REACT_APP_BASEURL}/users/${nameStore}/todolist`,
     }).then((res) => setTodolists(res.data.users[0].todolist));
   }, [handler]);
 
@@ -73,7 +73,7 @@ const Todolist = () => {
     };
     axios({
       method: "POST",
-      url: "http://localhost:3310/users/todolist",
+      url: `${process.env.REACT_APP_BASEURL}/users/todolist`,
       data: addData,
     }).then(() => setHandler(!handler));
     setNewTodo("");
@@ -87,7 +87,7 @@ const Todolist = () => {
     };
     axios({
       method: "PUT",
-      url: "http://localhost:3310/users/todolist",
+      url: `${process.env.REACT_APP_BASEURL}/users/todolist`,
       data: getData,
     }).then(() => setHandler(!handler));
     setShowEdit(-1);
@@ -123,7 +123,7 @@ const Todolist = () => {
     };
     axios({
       method: "DELETE",
-      url: "http://localhost:3310/users/todolist",
+      url: `${process.env.REACT_APP_BASEURL}/users/todolist`,
       data: data,
     })
       .then(() => setHandler(!handler))

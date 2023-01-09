@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
 
 const Login = () => {
   const [eye, setEye] = useState("password");
@@ -14,8 +13,7 @@ const Login = () => {
   };
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [success, setSuccess] = useState("");
+
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
@@ -42,34 +40,22 @@ const Login = () => {
       data: dataInput,
     })
       .then((res) => {
-        // toast.success(res.data.message, {
-        //   position: "top-center",
-        //   autoClose: 1500,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        // });
-        setSuccess(res.data.message);
         localStorage.setItem("name", res.data.result.user_name);
         localStorage.setItem("id", res.data.result.id);
         navigate("/todolist");
       })
-      // .catch((error) => {
-      //   // toast.error(error.response.data.message, {
-      //   //   position: "top-center",
-      //   //   autoClose: 1500,
-      //   //   hideProgressBar: false,
-      //   //   closeOnClick: true,
-      //   //   pauseOnHover: true,
-      //   //   draggable: true,
-      //   //   progress: undefined,
-      //   //   theme: "light",
-      //   // });
-      //   setError(true);
-      // })
+      .catch((error) => {
+        toast.error(error.response.data.message, {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      })
       .finally(() => setLoading(false));
   };
   return (
