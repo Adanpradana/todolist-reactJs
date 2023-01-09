@@ -5,7 +5,7 @@ const Hero = () => {
     <div className="xxl:container mx-auto ">
       <section className="hero h-screen bg-slate-100 lg:flex py-20">
         <div className=" bg-slate-100  lg:self-center sm:px-20  lg:flex ">
-          <div className=" lg:text-left  lg:self-center text-center  lg:h-1/2 lg:w-1/2">
+          <div className=" lg:text-left  lg:self-center text-center  lg:h-1/2 lg:w-1/2 ">
             <h1 className="text-3xl lg:text-5xl font-semibold text-sky-400 pb-5">
               Get aligned around your activity everywhere anywhere ✔
             </h1>
