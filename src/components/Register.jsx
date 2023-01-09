@@ -1,8 +1,9 @@
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Alert } from "./Alert";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Register = () => {
   const [eye, setEye] = useState("password");
   const eyeHandler = () => {
@@ -11,9 +12,8 @@ const Register = () => {
   const [user_name, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setrole] = useState("");
-  const [alertMessage, setAlertMessage] = useState("");
-  const [showAlert, setShowAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const userNameHandler = (userNameInput) => {
     setUserName(userNameInput);
   };
@@ -23,39 +23,65 @@ const Register = () => {
   const emailHandler = (emailInput) => {
     setEmail(emailInput);
   };
-  const roleHandler = (roleInput) => {
-    setrole(roleInput);
-  };
 
-  const registerHandler = () => {
+  const registerHandler = async (e) => {
+    setLoading(true);
+    e.preventDefault();
     const dataInput = {
       user_name,
       email,
-      role,
       password,
     };
-    axios({
+    await axios({
       method: "POST",
-      url: "http://localhost:3310/users",
+      url: `${process.env.REACT_APP_BASEURL}/users`,
       data: dataInput,
-    }).then((res) => setAlertMessage(res.data.message));
-
-    if (alertMessage) {
-      setShowAlert(true);
-      setTimeout(() => {
-        setShowAlert(false);
-      }, 1500);
-      return;
-    }
+    })
+      .then((res) =>
+        toast.success(res.message, {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      )
+      .catch((error) => {
+        console.log(error.message);
+      })
+      .finally(() => {
+        setUserName("");
+        setEmail("");
+        setPassword("");
+        setLoading(false);
+      });
   };
   return (
     <div className="xxl:container bg-neutral-400  px-10 m-auto flex justify-center items-center l h-screen ">
       <div className="container bg-white max-w-lg text-center p-10 rounded-xl ">
+        <ToastContainer
+          position="top-center"
+          autoClose={1500}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <div className="pb-5">
           <h1 className="font-bold text-3xl pb-5">Register</h1>
           <p className="leading-relaxed">Create account to reach todolist</p>
+          <p className="text-[0.7rem] text-red-400">
+            please use your fake email acc and enjoy !
+          </p>
         </div>
-        <form action="" onSubmit={() => registerHandler()}>
+        <form action="" onSubmit={(e) => registerHandler(e)}>
           <label className="block">
             <input
               type="Username"
@@ -68,6 +94,7 @@ const Register = () => {
                   focus:invalid:border-pink-500 focus:invalid:ring-pink-500
                     "
               onChange={(event) => userNameHandler(event.target.value)}
+              value={user_name}
             />
           </label>
           <label className="block pt-3">
@@ -82,20 +109,7 @@ const Register = () => {
                   focus:invalid:border-pink-500 focus:invalid:ring-pink-500
                     "
               onChange={(event) => emailHandler(event.target.value)}
-            />
-          </label>
-          <label className="block pt-3">
-            <input
-              type="Role"
-              placeholder="Role"
-              className="block w-full px-3 py-2 bg-white border
-                   border-slate-300 rounded-lg text-sm shadow-sm
-                    placeholder-slate-400
-                  focus:outline-none focus:border-violet-500 focus:ring-1
-                  focus:ring-violet-500 invalid:border-pink-500 invalid:text-pink-600
-                  focus:invalid:border-pink-500 focus:invalid:ring-pink-500
-                    "
-              onChange={(event) => roleHandler(event.target.value)}
+              value={email}
             />
           </label>
           <label className="block pt-3 relative">
@@ -111,6 +125,7 @@ const Register = () => {
                   "
               required
               onChange={(e) => passwordHandler(e.target.value)}
+              value={password}
             />
             {eye === "name" ? (
               <BsEye
@@ -126,20 +141,34 @@ const Register = () => {
               </i>
             )}
           </label>
+
+          <div className="pt-3 pb-10">
+            <p className="text-left text-sm  ">
+              having trouble register ?
+              <span className="font-bold cursor-pointer hover:text-violet-600 ">
+                contact us
+              </span>
+            </p>
+          </div>
+          <div className="pt-15 bg-violet-500 rounded-lg hover:bg-violet-600">
+            {user_name === "" && email === "" && password === "" ? (
+              <button
+                disabled
+                type="submit"
+                className="py-3 text-md disabled:text-slate-400 font-semibold w-full disabled:bg-slate-300 rounded-lg "
+              >
+                register
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="py-3 text-md text-white bg-violet-600 hover:bg-violet-400 font-semibold w-full rounded-lg "
+              >
+                {loading ? "loading.." : "register"}
+              </button>
+            )}
+          </div>
         </form>
-        <div className="pt-3 pb-10">
-          <p className="text-left text-sm  ">
-            having trouble register ?
-            <span className="font-bold cursor-pointer hover:text-violet-600 ">
-              contact us
-            </span>
-          </p>
-        </div>
-        <div className="pt-15 bg-violet-500 rounded-md hover:bg-violet-600">
-          <button className="py-3 text-md text-white font-semibold w-full">
-            register now
-          </button>
-        </div>
         <div className="pt-4">
           <p className="text-sm text-gray-700">
             please
