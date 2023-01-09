@@ -34,7 +34,7 @@ const Login = () => {
     };
     axios({
       method: "POST",
-      url: "http://localhost:3310/users/login",
+      url: "https://app-todolist.xyz/users/login",
       data: dataInput,
     })
       .then((res) => {
