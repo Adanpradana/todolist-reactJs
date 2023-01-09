@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+
 const Login = () => {
   const [eye, setEye] = useState("password");
   const eyeHandler = () => {
@@ -26,55 +28,56 @@ const Login = () => {
   };
 
   const navigate = useNavigate();
-  const signInHandler = (e) => {
+
+  const signInHandler = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const dataInput = {
       user_name,
       password,
     };
-    axios({
+    await axios({
       method: "POST",
-      url: "https://app-todolist.xyz/users/login",
+      url: `${process.env.REACT_APP_BASEURL}/users/login`,
       data: dataInput,
     })
       .then((res) => {
+        // toast.success(res.data.message, {
+        //   position: "top-center",
+        //   autoClose: 1500,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
         setSuccess(res.data.message);
         localStorage.setItem("name", res.data.result.user_name);
         localStorage.setItem("id", res.data.result.id);
-        if (res) {
-          toast.success(res.data.message, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          navigate("/todolist");
-        }
+        navigate("/todolist");
       })
-      .catch((error) =>
-        toast.error(error.response.data.message, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
-      )
-      .finally(() => setLoading(true));
+      // .catch((error) => {
+      //   // toast.error(error.response.data.message, {
+      //   //   position: "top-center",
+      //   //   autoClose: 1500,
+      //   //   hideProgressBar: false,
+      //   //   closeOnClick: true,
+      //   //   pauseOnHover: true,
+      //   //   draggable: true,
+      //   //   progress: undefined,
+      //   //   theme: "light",
+      //   // });
+      //   setError(true);
+      // })
+      .finally(() => setLoading(false));
   };
   return (
     <div className="xxl:container bg-neutral-400  px-10 m-auto flex justify-center items-center l h-screen ">
       <div>
         <ToastContainer
           position="top-center"
-          autoClose={5000}
+          autoClose={1500}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -151,7 +154,7 @@ const Login = () => {
                 type="submit"
                 className="py-3 text-md text-white bg-violet-600 hover:bg-violet-400 font-semibold w-full rounded-lg "
               >
-                sign in
+                {loading ? "loading.." : "sign in"}
               </button>
             )}
           </div>
