@@ -1,9 +1,17 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [dropDown, setDropDown] = useState(true);
   const [color, setColor] = useState(false);
+  const refOne = useRef(null);
+
+  useEffect(() => {
+    window.addEventListener("click", outsideTrigger, true);
+  }, []);
+
+  const outsideTrigger = (e) =>
+    !refOne.current.contains(e.target) && setDropDown(true);
 
   const scrollHandler = () =>
     window.scrollY > 1 ? setColor(true) : setColor(false);
@@ -34,6 +42,7 @@ const Navbar = () => {
                 ? "absolute right-2 max-w-[220px] w-full bg-white shadow-lg top-10 "
                 : "hidden md:shadow-none rounded-xl md:flex md:justify-center md:items-center md:static md:max-w-full md:bg-transparent"
             }
+            ref={refOne}
           >
             <div className="container mx-auto text-center md:flex ">
               <ul className="md:flex md:gap-10">
@@ -42,6 +51,11 @@ const Navbar = () => {
                 </li>
                 <li className="py-3 md:py-5 md:flex md:border-b-2 md:border-b-transparent hover:border-blue-400 hover:text-blue-400">
                   <button>REQUEST DEMO</button>
+                </li>
+                <li className=" py-3 md:py-5 md:hidden md:border-b-2 md:border-b-transparent hover:border-blue-400 hover:text-blue-400">
+                  <Link to={"/login"}>
+                    <button>LOGIN</button>
+                  </Link>
                 </li>
               </ul>
             </div>
