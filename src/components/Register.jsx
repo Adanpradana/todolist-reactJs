@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ThreeDots } from "react-loader-spinner";
+
 const Register = () => {
   const [eye, setEye] = useState("password");
   const eyeHandler = () => {
@@ -37,18 +39,20 @@ const Register = () => {
       url: `${process.env.REACT_APP_BASEURL}/users`,
       data: dataInput,
     })
-      .then((res) =>
-        toast.success(res.message, {
-          position: "top-center",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
-      )
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success(`${res.data.message}, please login to continue`, {
+            position: "top-center",
+            autoClose: 1100,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "colored",
+          });
+        }
+      })
       .catch((error) => {
         console.log(error.message);
       })
@@ -64,15 +68,15 @@ const Register = () => {
       <div className="container bg-white max-w-lg text-center p-10 rounded-xl ">
         <ToastContainer
           position="top-center"
-          autoClose={1500}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
+          autoClose={1100}
+          hideProgressBar
+          newestOnTop
+          closeOnClick={false}
           rtl={false}
           pauseOnFocusLoss
-          draggable
+          draggable={false}
           pauseOnHover
-          theme="light"
+          theme="colored"
         />
         <div className="pb-5">
           <h1 className="font-bold text-3xl pb-5">Register</h1>
@@ -95,6 +99,7 @@ const Register = () => {
                     "
               onChange={(event) => userNameHandler(event.target.value)}
               value={user_name}
+              required
             />
           </label>
           <label className="block pt-3">
@@ -110,6 +115,7 @@ const Register = () => {
                     "
               onChange={(event) => emailHandler(event.target.value)}
               value={email}
+              required
             />
           </label>
           <label className="block pt-3 relative">
@@ -171,14 +177,13 @@ const Register = () => {
         </form>
         <div className="pt-4">
           <p className="text-sm text-gray-700">
-            please
             <Link to={"/login"}>
+              go to{" "}
               <span className="font-bold cursor-pointer hover:text-violet-500">
-                {" "}
                 Login{" "}
               </span>
             </Link>
-            to continue
+            page
           </p>
         </div>
       </div>

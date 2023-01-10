@@ -45,15 +45,16 @@ const Login = () => {
         navigate("/todolist");
       })
       .catch((error) => {
+        setError(true);
         toast.error(error.response.data.message, {
           position: "top-center",
-          autoClose: 1500,
-          hideProgressBar: false,
-          closeOnClick: true,
+          autoClose: 1100,
+          hideProgressBar: true,
+          closeOnClick: false,
           pauseOnHover: true,
-          draggable: true,
+          draggable: false,
           progress: undefined,
-          theme: "light",
+          theme: "colored",
         });
       })
       .finally(() => setLoading(false));
@@ -63,15 +64,16 @@ const Login = () => {
       <div>
         <ToastContainer
           position="top-center"
-          autoClose={1500}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
+          autoClose={1100}
+          hideProgressBar
+          newestOnTop
+          closeOnClick={false}
           rtl={false}
           pauseOnFocusLoss
-          draggable
+          draggable={false}
           pauseOnHover
-          theme="light"
+          theme="colored"
+          id
         />
       </div>
       <div className="container bg-white max-w-lg text-center p-10 rounded-xl ">
@@ -136,12 +138,27 @@ const Login = () => {
                 sign in
               </button>
             ) : (
-              <button
-                type="submit"
-                className="py-3 text-md text-white bg-violet-600 hover:bg-violet-400 font-semibold w-full rounded-lg "
-              >
-                {loading ? "loading.." : "sign in"}
-              </button>
+              <div>
+                <button
+                  type="submit"
+                  className="h-[48px] flex items-center justify-center py-3 text-md text-white bg-violet-500 hover:bg-violet-600 font-semibold w-full rounded-lg "
+                >
+                  {loading ? (
+                    <ThreeDots
+                      height="30"
+                      width="40"
+                      radius="9"
+                      color="#ffffff"
+                      ariaLabel="three-dots-loading"
+                      wrapperStyle={{}}
+                      wrapperClassName="p-0"
+                      visible={true}
+                    />
+                  ) : (
+                    "sign in"
+                  )}
+                </button>
+              </div>
             )}
           </div>
         </form>
