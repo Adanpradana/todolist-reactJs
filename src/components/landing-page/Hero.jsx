@@ -1,9 +1,13 @@
 import heroImg from "../../assets/37.png";
 import { Link } from "react-router-dom";
+import instagram from "./../../assets/sosial-media/instagram.svg";
+import whatsapp from "./../../assets/sosial-media/whatsapp-white.svg";
+import linkedin from "./../../assets/sosial-media/linkedin.svg";
+import email from "./../../assets/sosial-media/gmail_old.svg";
 const Hero = () => {
   return (
-    <div className="xxl:container mx-auto ">
-      <section className="hero h-screen bg-slate-100 lg:flex py-20">
+    <div className="xxl:container mx-auto h-screen bg-slate-100">
+      <section className="hero bg-slate-100  lg:flex pt-20 pb-10">
         <div className=" bg-slate-100  lg:self-center sm:px-20  lg:flex ">
           <div className=" lg:text-left  lg:self-center text-center  lg:h-1/2 lg:w-1/2 ">
             <h1 className="text-3xl lg:text-5xl font-semibold text-sky-400 pb-5">
@@ -43,6 +47,61 @@ const Hero = () => {
           </div>
         </div>
       </section>
+      <div className="container items-center mx-auto">
+        <div className="text-center h-full">
+          <p className="text-md">We'd love to hear from you !</p>
+          <div className=" w-full flex justify-center gap-2 py-2">
+            <div className="cursor-pointer">
+              <img
+                onClick={() =>
+                  window.open("https://www.instagram.com/Adanpradanaa/")
+                }
+                src={instagram}
+                alt=""
+                className="w-7 h-7 bg-slate-400 hover:bg-gradient-to-r from-violet-500 to-fuchsia-500 p-1 rounded-md"
+              />
+            </div>
+            <div className="cursor-pointer">
+              <img
+                onClick={() =>
+                  window.open(
+                    "https://api.whatsapp.com/send?phone=081999984880"
+                  )
+                }
+                src={whatsapp}
+                alt=""
+                className="w-7 h-7 bg-slate-400 hover:bg-[#25D366] p-1 rounded-md"
+              />
+            </div>
+            <div className="cursor-pointer">
+              <img
+                onClick={() =>
+                  window.open(
+                    "https://www.linkedin.com/in/adan-pradana-31a7041a1/"
+                  )
+                }
+                src={linkedin}
+                alt=""
+                className="w-7 h-7 bg-slate-400 hover:bg-[#0077b5] p-1 rounded-md"
+              />
+            </div>
+            <div className="cursor-pointer">
+              <img
+                onClick={() => window.open("mailto:adanrizkahariz@gmail.com")}
+                src={email}
+                alt=""
+                className="w-7 h-7 bg-slate-400 hover:bg-white p-1 rounded-md"
+              />
+            </div>
+          </div>
+          <div className="pt-10 cursor-pointer">
+            <p className="text-xs text-slate-400">
+              &#169; Copyright{" "}
+              <span className="font-semibold">Adan Pradana</span> 2022-2023.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
