@@ -1,18 +1,18 @@
 import React, { Children, useContext, useEffect, useState } from "react";
 import { BiPlus, BiPencil, BiTrash } from "react-icons/bi";
+import { ToastContainer, toast } from "react-toastify";
 import { BsPersonCircle } from "react-icons/bs";
+import { RotatingLines } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "./useContext/app-context";
-import { Alert } from "./components/Alert";
-import ReactTooltip from "react-tooltip";
 import EmptyTodo from "./components/Empty";
-import alert from "./components/alertData";
+import ReactTooltip from "react-tooltip";
 import axios from "axios";
 import Edit from "./Edit";
-import "./components/index.css";
+
 import "./components/empty-todo/emptyTodo.css";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./components/index.css";
 import "animate.css";
 
 const Todolist = () => {
@@ -28,6 +28,9 @@ const Todolist = () => {
   const [edit, setEdit] = useState("");
   const [showEdit, setShowEdit] = useState(-1);
   const [showFormCreate, setShowFormCreate] = useState(false);
+
+  //utils
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -52,18 +55,18 @@ const Todolist = () => {
 
   const addTodo = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (!newTodo) {
-      toast.error("todolist cannot be empty !", {
+      return toast.error("todolist cannot be empty !", {
         position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
+        autoClose: 1100,
+        hideProgressBar: true,
+        closeOnClick: false,
         pauseOnHover: true,
-        draggable: true,
+        draggable: false,
         progress: undefined,
-        theme: "light",
+        theme: "colored",
       });
-      return;
     }
     setShowFormCreate(false);
 
@@ -75,11 +78,14 @@ const Todolist = () => {
       method: "POST",
       url: `${process.env.REACT_APP_BASEURL}/users/todolist`,
       data: addData,
-    }).then(() => setHandler(!handler));
+    })
+      .then(() => setHandler(!handler))
+      .finally(() => setLoading(false));
     setNewTodo("");
   };
   const saveEdit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const getData = {
       id: showEdit,
       todolist: edit,
@@ -89,7 +95,9 @@ const Todolist = () => {
       method: "PUT",
       url: `${process.env.REACT_APP_BASEURL}/users/todolist`,
       data: getData,
-    }).then(() => setHandler(!handler));
+    })
+      .then(() => setHandler(!handler))
+      .finally(() => setLoading(false));
     setShowEdit(-1);
     setEdit("");
   };
@@ -117,6 +125,7 @@ const Todolist = () => {
   };
   const removeTodoList = (res, e) => {
     e.preventDefault();
+    setLoading(true);
     const data = {
       id: res.id,
       userId: idStore,
@@ -127,7 +136,8 @@ const Todolist = () => {
       data: data,
     })
       .then(() => setHandler(!handler))
-      .then(() => setHover(!res.id));
+      .then(() => setHover(!res.id))
+      .finally(() => setLoading(false));
   };
   const showAddTaskHandler = (e) => {
     e.preventDefault();
@@ -148,15 +158,15 @@ const Todolist = () => {
         <div>
           <ToastContainer
             position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
+            autoClose={1100}
+            hideProgressBar
+            newestOnTop
+            closeOnClick={false}
             rtl={false}
             pauseOnFocusLoss
-            draggable
+            draggable={false}
             pauseOnHover
-            theme="light"
+            theme="colored"
           />
         </div>
         <nav className="bg-red-200 flex px-10  justify-between">
@@ -235,10 +245,20 @@ const Todolist = () => {
         )}
 
         <div className="pt-20 text-left px-10 ">
-          <div className="pb-4">
-            <h1 className="text-lg text-center">ACTIVITY</h1>
+          <div className="pb-4  flex flex-col items-center">
+            <div className="text-center">
+              {loading && (
+                <RotatingLines
+                  strokeColor="grey"
+                  strokeWidth="4"
+                  animationDuration="0.75"
+                  width="50"
+                  visible={true}
+                />
+              )}
+            </div>
+            <h1 className="text-lg text-center pt-5">ACTIVITY</h1>
           </div>
-
           <div className="border border-slate-400 rounded-md overflow-hidden mb-8">
             {todolists.length > 0 ? (
               Children.toArray(

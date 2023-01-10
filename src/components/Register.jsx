@@ -166,12 +166,27 @@ const Register = () => {
                 register
               </button>
             ) : (
-              <button
-                type="submit"
-                className="py-3 text-md text-white bg-violet-600 hover:bg-violet-400 font-semibold w-full rounded-lg "
-              >
-                {loading ? "loading.." : "register"}
-              </button>
+              <div>
+                <button
+                  type="submit"
+                  className="h-[48px] flex items-center justify-center py-3 text-md text-white bg-violet-500 hover:bg-violet-600 font-semibold w-full rounded-lg "
+                >
+                  {loading ? (
+                    <ThreeDots
+                      height="30"
+                      width="40"
+                      radius="9"
+                      color="#ffffff"
+                      ariaLabel="three-dots-loading"
+                      wrapperStyle={{}}
+                      wrapperClassName="p-0"
+                      visible={true}
+                    />
+                  ) : (
+                    "register"
+                  )}
+                </button>
+              </div>
             )}
           </div>
         </form>
