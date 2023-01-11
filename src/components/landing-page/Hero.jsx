@@ -4,6 +4,7 @@ import instagram from "./../../assets/sosial-media/instagram.svg";
 import whatsapp from "./../../assets/sosial-media/whatsapp-white.svg";
 import linkedin from "./../../assets/sosial-media/linkedin.svg";
 import email from "./../../assets/sosial-media/gmail_old.svg";
+import github from "./../../assets/sosial-media/github.svg";
 const Hero = () => {
   return (
     <div className="xxl:container mx-auto h-screen bg-slate-100">
@@ -47,7 +48,7 @@ const Hero = () => {
           </div>
         </div>
       </section>
-      <div className="container items-center mx-auto">
+      <div className="container items-center mx-auto bg-slate-100">
         <div className="text-center h-full">
           <p className="text-md">We'd love to hear from you !</p>
           <div className=" w-full flex justify-center gap-2 py-2">
@@ -93,8 +94,16 @@ const Hero = () => {
                 className="w-7 h-7 bg-slate-400 hover:bg-white p-1 rounded-md"
               />
             </div>
+            <div className="cursor-pointer">
+              <img
+                onClick={() => window.open("https://github.com/Adanpradana")}
+                src={github}
+                alt=""
+                className="w-7 h-7 bg-slate-400 hover:bg-[#171515] p-1 rounded-md"
+              />
+            </div>
           </div>
-          <div className="pt-10 cursor-pointer">
+          <div className="py-5">
             <p className="text-xs text-slate-400">
               &#169; Copyright{" "}
               <span className="font-semibold">Adan Pradana</span> 2022-2023.
