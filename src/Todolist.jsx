@@ -55,7 +55,6 @@ const Todolist = () => {
 
   const addTodo = (e) => {
     e.preventDefault();
-    setLoading(true);
     if (!newTodo) {
       return toast.error("todolist cannot be empty !", {
         position: "top-center",
@@ -68,6 +67,7 @@ const Todolist = () => {
         theme: "colored",
       });
     }
+    setLoading(true);
     setShowFormCreate(false);
 
     const addData = {
