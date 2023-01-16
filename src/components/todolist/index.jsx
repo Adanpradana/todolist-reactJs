@@ -1,10 +1,10 @@
 import React, { Children, useEffect, useState } from "react";
 import { BiPlus, BiPencil, BiTrash } from "react-icons/bi";
-import { AppContext } from "../../useContext/app-context";
 import { ToastContainer, toast } from "react-toastify";
-import { RotatingLines } from "react-loader-spinner";
 import { BsPersonCircle } from "react-icons/bs";
+import { RotatingLines } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../useContext/app-context";
 import ReactTooltip from "react-tooltip";
 import EmptyTodo from "./Empty";
 import Edit from "./Edit";
@@ -15,16 +15,16 @@ import "../index.css";
 import "animate.css";
 
 const Todolist = () => {
+  const [showFormCreate, setShowFormCreate] = useState(false);
   const [handler, setHandler] = useState(false);
-  const [newTodo, setNewTodo] = useState("");
-  const [users, setUsers] = useState([]);
-  const [todolists, setTodolists] = useState([]);
-  const [hover, setHover] = useState(-1);
   const [error, setEerror] = useState(false);
+  const [todolists, setTodolists] = useState([]);
+  const [users, setUsers] = useState([]);
   const idStore = localStorage.getItem("id");
+  const [newTodo, setNewTodo] = useState("");
   const [edit, setEdit] = useState("");
   const [showEdit, setShowEdit] = useState(-1);
-  const [showFormCreate, setShowFormCreate] = useState(false);
+  const [hover, setHover] = useState(-1);
 
   //utils
   const [loading, setLoading] = useState(false);
