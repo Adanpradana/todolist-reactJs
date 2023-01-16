@@ -1,21 +1,21 @@
-import { BsEye, BsEyeSlash } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { ThreeDots } from "react-loader-spinner";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const Register = () => {
+  const [loading, setLoading] = useState(false);
+  const [user_name, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [eye, setEye] = useState("password");
+  const [email, setEmail] = useState("");
+
   const eyeHandler = () => {
     eye === "name" ? setEye("password") : setEye("name");
   };
-  const [user_name, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-
   const userNameHandler = (userNameInput) => {
     setUserName(userNameInput);
   };

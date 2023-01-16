@@ -1,16 +1,15 @@
 import React, { Children, useEffect, useState } from "react";
 import { BiPlus, BiPencil, BiTrash } from "react-icons/bi";
-import { ToastContainer, toast } from "react-toastify";
-import { BsPersonCircle } from "react-icons/bs";
-import { RotatingLines } from "react-loader-spinner";
-import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../useContext/app-context";
+import { ToastContainer, toast } from "react-toastify";
+import { RotatingLines } from "react-loader-spinner";
+import { BsPersonCircle } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
 import EmptyTodo from "./Empty";
-import axios from "axios";
 import Edit from "./Edit";
+import axios from "axios";
 
-// import "../components/empty-todo/emptyTodo.css";
 import "react-toastify/dist/ReactToastify.css";
 import "../index.css";
 import "animate.css";

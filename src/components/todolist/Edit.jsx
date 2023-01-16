@@ -1,5 +1,5 @@
-import { useContext } from "react";
 import { BiCheck, BiX } from "react-icons/bi";
+import { useContext } from "react";
 import { AppContext } from "../../useContext/app-context";
 
 const Edit = () => {
