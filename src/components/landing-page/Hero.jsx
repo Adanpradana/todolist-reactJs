@@ -3,23 +3,20 @@ import instagram from "./../../assets/sosial-media/instagram.svg";
 import linkedin from "./../../assets/sosial-media/linkedin.svg";
 import email from "./../../assets/sosial-media/gmail_old.svg";
 import github from "./../../assets/sosial-media/github.svg";
-import heroImg from "../../assets/37.png";
+import heroImg from "../../assets/38.png";
 import { Link } from "react-router-dom";
 const Hero = () => {
   return (
-    <div className="xxl:container mx-auto h-screen bg-slate-100">
-      <section className="hero bg-slate-100  lg:flex pt-20 pb-10">
-        <div className=" bg-slate-100  lg:self-center sm:px-20  lg:flex ">
-          <div className=" lg:text-left  lg:self-center text-center  lg:h-1/2 lg:w-1/2 ">
-            <h1 className="text-3xl lg:text-5xl font-semibold text-sky-400 pb-5">
+    <div className="xxl:container mx-auto  h-screen bg-slate-100">
+      <section className="hero pt-20 pb-5 w-full">
+        <div className="flex flex-wrap md:flex-nowrap px-5 sm:px-20 lg:justify-around xl:px-48">
+          <div className="flex flex-wrap justify-center self-center w-full text-center md:justify-start md:text-left  ">
+            <h1 className="text-3xl md:text-4xl xl:text-5xl font-semibold text-sky-400 pb-5">
               Get aligned around your activity everywhere anywhere ✔
             </h1>
             <p className="leading-relaxed">
               turn your activity into a source of information instead of a list
-              of frustration
-            </p>
-            <p className="leading-relaxed">
-              make the timeframe & impact of your goals roadmap
+              of frustration, make the timeframe & impact of your goals roadmap
             </p>
             <div className="pt-5 ">
               <Link to={"/login"}>
@@ -43,8 +40,8 @@ const Hero = () => {
               </Link>
             </div>
           </div>
-          <div className=" lg:w-1/2 lg:h-full ">
-            <img src={heroImg} alt="" className="w-full lg:h-3/4  md:z-10" />
+          <div className="lg:h-fit w-full flex justify-center md:justify-end">
+            <img src={heroImg} alt="" className="" />
           </div>
         </div>
       </section>
@@ -103,7 +100,7 @@ const Hero = () => {
               />
             </div>
           </div>
-          <div className="py-5">
+          <div className="py-4">
             <p className="text-xs text-slate-400">
               &#169; Copyright{" "}
               <span className="font-semibold">Adan Pradana</span> 2022-2023.
