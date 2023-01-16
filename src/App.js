@@ -1,7 +1,7 @@
 import { Routes, Route, Outlet, useNavigate } from "react-router-dom";
 import LandingPage from "./components/landing-page/";
 import Register from "./components/register";
-import Todolist from "./todolist";
+import Todolist from "./components/todolist";
 import Login from "./components/login";
 import "./components/index.css";
 import "./components/empty-todo/emptyTodo.css";

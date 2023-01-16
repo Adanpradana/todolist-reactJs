@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-// import "bulma/css/bulma.css";
 import "./components/empty-todo/emptyTodo.css";
 import "./components/landing-page/index.css";
 import { BrowserRouter } from "react-router-dom";
