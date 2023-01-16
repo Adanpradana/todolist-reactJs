@@ -1,10 +1,10 @@
-import heroImg from "../../assets/37.png";
-import { Link } from "react-router-dom";
-import instagram from "./../../assets/sosial-media/instagram.svg";
 import whatsapp from "./../../assets/sosial-media/whatsapp-white.svg";
+import instagram from "./../../assets/sosial-media/instagram.svg";
 import linkedin from "./../../assets/sosial-media/linkedin.svg";
 import email from "./../../assets/sosial-media/gmail_old.svg";
 import github from "./../../assets/sosial-media/github.svg";
+import heroImg from "../../assets/37.png";
+import { Link } from "react-router-dom";
 const Hero = () => {
   return (
     <div className="xxl:container mx-auto h-screen bg-slate-100">

@@ -1,31 +1,29 @@
-import axios from "axios";
-import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import { ToastContainer, toast } from "react-toastify";
+import { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const Login = () => {
+  const [user_name, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [eye, setEye] = useState("password");
+  const navigate = useNavigate();
+
   const eyeHandler = () => {
     eye === "name" ? setEye("password") : setEye("name");
   };
-  const [user_name, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [disableButton, setDisableButton] = useState(false);
 
   const userNameHandler = (userNameInput) => {
     setUserName(userNameInput);
   };
+
   const passwordHandler = (passwordInput) => {
     setPassword(passwordInput);
   };
-
-  const navigate = useNavigate();
 
   const signInHandler = async (e) => {
     setLoading(true);
@@ -45,7 +43,6 @@ const Login = () => {
         navigate("/todolist");
       })
       .catch((error) => {
-        setError(true);
         toast.error(error.response.data.message, {
           position: "top-center",
           autoClose: 1100,
