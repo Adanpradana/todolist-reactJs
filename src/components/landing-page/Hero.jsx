@@ -1,40 +1,41 @@
-import whatsapp from "./../../assets/sosial-media/whatsapp-white.svg";
-import instagram from "./../../assets/sosial-media/instagram.svg";
-import linkedin from "./../../assets/sosial-media/linkedin.svg";
-import email from "./../../assets/sosial-media/gmail_old.svg";
-import github from "./../../assets/sosial-media/github.svg";
+import Typewriter from "typewriter-effect";
 import heroImg from "../../assets/38.png";
 import { Link } from "react-router-dom";
 const Hero = () => {
   return (
-    <div className="xxl:container mx-auto  h-screen bg-slate-100">
-      <section className="hero pt-20 pb-5 w-full">
-        <div className="flex flex-wrap md:flex-nowrap px-5 sm:px-20 lg:justify-around xl:px-48">
-          <div className="flex flex-wrap justify-center self-center w-full text-center md:justify-start md:text-left  ">
-            <h1 className="text-3xl md:text-4xl xl:text-5xl font-semibold text-sky-400 pb-5">
-              Get aligned around your activity everywhere anywhere ✔
-            </h1>
-            <p className="leading-relaxed">
+    <div className="xxl:container mx-auto ">
+      <section className="hero pt-20  bg-slate-200">
+        <div className=" relative flex flex-wrap md:flex-nowrap px-5 pb-20 sm:px-28 lg:justify-around xl:px-48 bg-yellow-200">
+          <div className="flex flex-wrap gap-5 justify-center self-center w-full text-center md:justify-start md:text-left leading-[40px]">
+            <p className="text-3xl md:text-4xl xl:text-5xl  font-medium text-purple-plum ">
+              Get aligned around your activity
+              <span className="font-semibold text-dark-sea-green">
+                <Typewriter
+                  options={{
+                    strings: ["everywhere", "anywhere"],
+                    autoStart: true,
+                    loop: true,
+                    cursor: "&#10074",
+                    pauseFor: 1000,
+                  }}
+                />
+              </span>
+            </p>
+            <p className="text-lg">
               turn your activity into a source of information instead of a list
               of frustration, make the timeframe & impact of your goals roadmap
             </p>
-            <div className="pt-5 ">
-              <Link to={"/login"}>
-                <button
-                  className="
-              border
-            border-zinc-300
-              py-2
-              px-5 
-              font-medium
-              rounded
-              hover:shadow-lg 
+            <div
+              className=" border rounded-xl  hover:shadow-lg 
+              bg-purple-plum
               hover:opacity-70
-              hover:text-neutral-50
               hover:bg-sky-400 
               transition duration-400
-              ease-in-out"
-                >
+              ease-in-out
+            border-zinc-300"
+            >
+              <Link to={"/login"}>
+                <button className="py-2 px-14 font-semibold text-white  ">
                   GET STARTED
                 </button>
               </Link>
@@ -43,71 +44,28 @@ const Hero = () => {
           <div className="lg:h-fit w-full flex justify-center md:justify-end">
             <img src={heroImg} alt="" className="" />
           </div>
+          <div className="w-full  md:absolute px-5 md:px-10 lg:px-48 left-0 -bottom-14 flex self-center justify-center">
+            <div className="bg-red-200 container w-full h-auto flex self-center justify-center gap-5 flex-wrap md:flex-nowrap">
+              <div className="bg-white flex flex-col text-center gap-7 w-full rounded-lg">
+                <h1 className="font-bold text-5xl text-slate-500">98%</h1>
+                <p>GTmetrix test performance</p>
+              </div>
+              <div className="bg-white flex flex-col text-center gap-7 w-full rounded-lg">
+                <h1 className="font-bold text-5xl text-slate-500">98%</h1>
+                <p>GTmetrix test performance</p>
+              </div>
+              <div className="bg-white flex flex-col text-center gap-7 w-full rounded-lg">
+                <h1 className="font-bold text-5xl text-slate-500">98%</h1>
+                <p>GTmetrix test performance</p>
+              </div>
+              <div className="bg-white flex flex-col text-center gap-7 w-full rounded-lg">
+                <h1 className="font-bold text-5xl text-slate-500">98%</h1>
+                <p>GTmetrix test performance</p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-      <div className="container items-center mx-auto bg-slate-100">
-        <div className="text-center h-full">
-          <p className="text-md">We'd love to hear from you !</p>
-          <div className=" w-full flex justify-center gap-2 py-2">
-            <div className="cursor-pointer">
-              <img
-                onClick={() =>
-                  window.open("https://www.instagram.com/Adanpradanaa/")
-                }
-                src={instagram}
-                alt=""
-                className="w-7 h-7 bg-slate-400 hover:bg-gradient-to-r from-violet-500 to-fuchsia-500 p-1 rounded-md"
-              />
-            </div>
-            <div className="cursor-pointer">
-              <img
-                onClick={() =>
-                  window.open(
-                    "https://api.whatsapp.com/send?phone=081999984880"
-                  )
-                }
-                src={whatsapp}
-                alt=""
-                className="w-7 h-7 bg-slate-400 hover:bg-[#25D366] p-1 rounded-md"
-              />
-            </div>
-            <div className="cursor-pointer">
-              <img
-                onClick={() =>
-                  window.open(
-                    "https://www.linkedin.com/in/adan-pradana-31a7041a1/"
-                  )
-                }
-                src={linkedin}
-                alt=""
-                className="w-7 h-7 bg-slate-400 hover:bg-[#0077b5] p-1 rounded-md"
-              />
-            </div>
-            <div className="cursor-pointer">
-              <img
-                onClick={() => window.open("mailto:adanrizkahariz@gmail.com")}
-                src={email}
-                alt=""
-                className="w-7 h-7 bg-slate-400 hover:bg-white p-1 rounded-md"
-              />
-            </div>
-            <div className="cursor-pointer">
-              <img
-                onClick={() => window.open("https://github.com/Adanpradana")}
-                src={github}
-                alt=""
-                className="w-7 h-7 bg-slate-400 hover:bg-[#171515] p-1 rounded-md"
-              />
-            </div>
-          </div>
-          <div className="py-4">
-            <p className="text-xs text-slate-400">
-              &#169; Copyright{" "}
-              <span className="font-semibold">Adan Pradana</span> 2022-2023.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

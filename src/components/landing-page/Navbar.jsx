@@ -60,9 +60,17 @@ const Navbar = () => {
               </ul>
             </div>
           </nav>
-          <div className="hidden md:flex hover:bg-[#b6b7ee] rounded-md bg-[#AEB0E1] hover:text-slate-100">
+          <div
+            className="hidden md:flex border rounded-md  hover:shadow-lg 
+                bg-blue-gray
+                hover:opacity-70
+                hover:bg-sky-400 
+                transition duration-400
+                ease-in-out
+              border-zinc-300"
+          >
             <Link to={"/login"}>
-              <button className="py-2 px-6 text-white font-normal">
+              <button className="py-2 px-8 font-normal text-white">
                 LOGIN
               </button>
             </Link>
