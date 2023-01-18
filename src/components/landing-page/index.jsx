@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import NotFound from "../NotFound";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
+import Customer from "./Customer";
 
 const LandingPage = () => {
   useEffect(() => {
@@ -13,6 +14,7 @@ const LandingPage = () => {
     <section>
       <Navbar />
       <Hero />
+      <Customer />
     </section>
   );
 };
