@@ -15,8 +15,8 @@ const Hero = () => {
 
   return (
     <div className="xxl:container mx-auto ">
-      <section className="hero pt-20  bg-slate-200">
-        <div className=" relative flex flex-wrap md:flex-nowrap px-5 pb-20 sm:px-28 lg:justify-around xl:px-48 ">
+      <section className="hero pt-20 pb-10 bg-slate-200">
+        <div className=" relative flex flex-wrap md:flex-nowrap px-5 pb-5 sm:px-28 lg:justify-around xl:px-48 ">
           <div className="flex flex-wrap gap-5 justify-center self-center w-full text-center md:justify-start md:text-left leading-[40px]">
             <div className="text-3xl md:text-4xl xl:text-5xl  font-medium text-purple-plum ">
               Get aligned around your activity
@@ -54,7 +54,7 @@ const Hero = () => {
           <div className="lg:h-fit w-full flex justify-center md:justify-end">
             <img src={heroImg} alt="" className="" />
           </div>
-          <div className="w-full  md:absolute px-5 md:px-10 lg:px-48 left-0 -bottom-14 flex self-center justify-center">
+          <div className="w-full  md:absolute px-5 md:px-10 lg:px-48 left-0 -bottom-24  flex self-center justify-center">
             <div className=" container w-full h-auto flex self-center justify-center gap-5 flex-wrap md:flex-nowrap">
               <div className="stats w-full md:w-auto text-center md:text-left stats-vertical md:stats-horizontal shadow">
                 <div className="stat">

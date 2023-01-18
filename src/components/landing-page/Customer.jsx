@@ -1,9 +1,9 @@
 export default function Customer() {
   return (
-    <div className="lg:py-24 px-5 sm:px-20 md:px-32 lg:px-28 md:py-16 xl:px-48 bg-slate-200 w-full  flex justify-center">
-      <div className=" container flex flex-wrap justify-center w-full  gap-7 lg:py-10 rounded-xl">
+    <div className="lg:py-24 px-5 sm:px-20 md:px-32 lg:px-28 md:py-16 xl:px-48 bg-slate-300 w-full  flex justify-center">
+      <div className=" container flex flex-wrap justify-center w-full pt-10 gap-7 lg:py-10 rounded-xl">
         <div className="top-content flex flex-wrap justify-center text-center">
-          <div className="lg:w-1/2 lg:text-left  pb-7">
+          <div className="lg:w-1/2 lg:text-left pb-7">
             <h1 className="font-normal text-xl pb-4 ">
               We make your activity easier
             </h1>
