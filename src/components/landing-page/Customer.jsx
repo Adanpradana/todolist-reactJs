@@ -1,4 +1,8 @@
+import { useState } from "react";
+
 export default function Customer() {
+  const [loadImg, setLoadImg] = useState(false);
+  const loadHandling = () => setLoadImg(true);
   return (
     <div className="lg:py-24 px-5 sm:px-20 md:px-32 lg:px-28 md:py-16 xl:px-48 bg-slate-300 w-full  flex justify-center">
       <div className=" container flex flex-wrap justify-center w-full pt-10 gap-7 lg:py-10 rounded-xl">
@@ -20,9 +24,15 @@ export default function Customer() {
           </div>
         </div>
         <div className="card-content w-3/4 sm:w-1/2 md:w-full flex-wrap flex self-center justify-center xl:justify-between gap-3">
-          <div className="card md:w-72 bg-base-100 shadow-xl">
-            <figure>
-              <img src="https://placeimg.com/400/220/arch" alt="Shoes" />
+          <div className="card md:w-72 h-full bg-base-100 shadow-xl scale-100">
+            <figure
+              className={loadImg ? null : "bg-slate-500 w-full h-[160px]"}
+            >
+              <img
+                onLoad={() => loadHandling()}
+                src="https://placeimg.com/400/220/arch"
+                alt="Shoes"
+              />
             </figure>
             <div className="card-body">
               <h2 className="card-title">
