@@ -3,6 +3,7 @@ import NotFound from "../NotFound";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
 import Customer from "./Customer";
+import Testimony from "./Testimony";
 
 const LandingPage = () => {
   useEffect(() => {
@@ -15,6 +16,7 @@ const LandingPage = () => {
       <Navbar />
       <Hero />
       <Customer />
+      <Testimony />
     </section>
   );
 };

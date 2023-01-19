@@ -5,10 +5,10 @@ export default function Customer() {
   const loadHandling = () => setLoadImg(true);
   return (
     <div className="lg:py-24 px-5 sm:px-20 md:px-32 lg:px-28 md:py-16 xl:px-48 bg-slate-300 w-full  flex justify-center">
-      <div className=" container flex flex-wrap justify-center w-full pt-10 gap-7 lg:py-10 rounded-xl">
+      <div className=" container flex flex-wrap justify-center w-full py-10 gap-7 lg:py-10 rounded-xl">
         <div className="top-content flex flex-wrap justify-center text-center">
           <div className="lg:w-1/2 lg:text-left pb-7">
-            <h1 className="font-normal text-xl pb-4 ">
+            <h1 className="font-semibold text-lg pb-4 uppercase">
               We make your activity easier
             </h1>
             <h2 className="font-semibold text-3xl w-full text-violet-900">
