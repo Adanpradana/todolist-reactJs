@@ -7,13 +7,13 @@ module.exports = {
         padding: "0",
       },
       keyframes: {
-        alapola: {
-          "0%": { opacity: "0", transform: "translateY(-250px)" },
-          "100%": { opacity: "1", transform: "translateY(0px)" },
+        scroll: {
+          "0%": { left: "0" },
+          "100%": { left: "-100%" },
         },
       },
       animation: {
-        alapola: "1s ease 0s 1 normal forwards",
+        animate: "scroll 15s linear infinite",
       },
       colors: {
         "dark-orchid": "#af2bbf",

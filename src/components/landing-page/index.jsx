@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Hero from "./Hero";
 import Customer from "./Customer";
 import Testimony from "./Testimony";
+import Technology from "./Technology";
 
 const LandingPage = () => {
   useEffect(() => {
@@ -17,6 +18,7 @@ const LandingPage = () => {
       <Hero />
       <Customer />
       <Testimony />
+      <Technology />
     </section>
   );
 };
