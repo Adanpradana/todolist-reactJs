@@ -1,39 +1,57 @@
 import { HiStar } from "react-icons/hi";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 export default function Testimony() {
-  const [name, setName] = useState("");
-  const [name2, setName2] = useState("");
-  const [name3, setName3] = useState("");
-  const [name4, setName4] = useState("");
-  const [comment, setComment] = useState("");
-  const [comment2, setComment2] = useState("");
-  const [comment3, setComment3] = useState("");
-  const [comment4, setComment4] = useState("");
-  const [data, setData] = useState({});
+  const [author, setAuthor] = useState("");
+  const [author2, setAuthor2] = useState("");
+  const [author3, setAuthor3] = useState("");
+  const [author4, setAuthor4] = useState("");
+  const [content, setContent] = useState("");
+  const [content2, setContent2] = useState("");
+  const [content3, setContent3] = useState("");
+  const [content4, setContent4] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios({
       method: "GET",
       url: "https://api.quotable.io/random?maxLength=60",
     })
-      .then((res) => console.log(res.data.author))
-      .then((res) => setName(res.data.author))
-      // .then((res) => setName2(res.data.author))
-      // .then((res) => setName3(res.data.author))
-      // .then((res) => setName4(res.data.author))
-      .then((res) => setComment(res.data.content));
-
-    // console.log(data);
-    // .then((res) => setComment2(res.data.author))
-    // .then((res) => setComment3(res.data.author));
+      .then((res) => {
+        setAuthor(res.data.author);
+        setContent(res.data.content);
+      })
+      .finally(() => setLoading(false));
+    axios({
+      method: "GET",
+      url: "https://api.quotable.io/random?maxLength=60",
+    }).then((res) => {
+      setAuthor2(res.data.author);
+      setContent2(res.data.content);
+    });
+    axios({
+      method: "GET",
+      url: "https://api.quotable.io/random?maxLength=60",
+    }).then((res) => {
+      setAuthor3(res.data.author);
+      setContent3(res.data.content);
+    });
+    axios({
+      method: "GET",
+      url: "https://api.quotable.io/random?maxLength=60",
+    }).then((res) => {
+      setAuthor4(res.data.author);
+      setContent4(res.data.content);
+    });
   }, []);
-  // console.log(data);
 
   return (
-    <section className="w-full  bg-slate-200 p-5 lg:px-48">
-      <div className="container m-auto w-full  bg-red-300  h-screen flex flex-wrap ">
-        <div className="w-full bg-slate-500 text-center lg:text-left flex flex-col  lg:self-center gap-5 lg:flex-1">
+    <section className="w-full  bg-slate-200 p-5 xl:px-48">
+      <div className="container m-auto w-full  flex flex-wrap ">
+        <div className="w-full  text-center lg:text-left flex flex-col  lg:self-center gap-5 lg:flex-1">
           <h2 className="font-semibold text-lg uppercase ">meet todolist</h2>
           <h1 className="font-semibold text-4xl w-full text-violet-900">
             Todo solution for your activity
@@ -63,56 +81,85 @@ export default function Testimony() {
             <p className="text-[0.9rem]">Rated 4,9/5 form over 485 review</p>
           </div>
         </div>
-        <div className="w-full bg-yellow-300 lg:self-center lg:flex-1 py-5 lg:py-0 lg:px-10 ">
-          <div className="container bg-slate-400  flex flex-col gap-3 lg:w-[500px] lg:p-5">
-            <div className="bg-red-200  relative ">
-              <div className="  flex self-center gap-5 bg-green-200 p-3">
-                <img src="https://i.pravatar.cc/100" alt="" />
+        <div className="w-full  lg:self-center lg:flex-1 py-5 lg:py-0 lg:pl-10 ">
+          <div className="container bg-slate-300  flex flex-col gap-4 lg:w-[500px] lg:p-5 rounded-sm">
+            <div className="relative shadow-lg ">
+              <div className="  flex self-center gap-5 bg-purple-200 p-3 rounded-md">
+                <div className="w-[100px] h-[100px] bg-gray-100">
+                  {(
+                    <img
+                      src="https://i.pravatar.cc/100"
+                      alt=""
+                      className="w-full h-full rounded-md"
+                    />
+                  ) || <Skeleton />}
+                </div>
                 <div className="flex flex-col gap-1 self-center">
-                  <h1 className="text-lg font-medium">{name}</h1>
-                  <p className="text-[0.9rem]">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptatum.
-                  </p>
+                  <h1 className="text-lg font-medium">
+                    {author || <Skeleton />}
+                  </h1>
+                  <p className="text-[0.9rem]">{content || <Skeleton />}</p>
+
                   <p className="text-[0.7rem]">Lorem ipsum dolor sit amet.</p>
                 </div>
               </div>
             </div>
-            <div className="bg-red-200  relative ">
-              <div className="  flex self-center gap-5 bg-green-200 p-3">
-                <img src="https://i.pravatar.cc/100" alt="" />
+            <div className="relative shadow-lg">
+              <div className="  flex self-center gap-5 bg-purple-200 p-3 rounded-md">
+                <div>
+                  {(
+                    <img
+                      src="https://i.pravatar.cc/99"
+                      alt=""
+                      className="w-full h-full rounded-md"
+                    />
+                  ) || <Skeleton />}
+                </div>
                 <div className="flex flex-col gap-1 self-center">
-                  <h1 className="text-lg font-medium">{name}</h1>
-                  <p className="text-[0.9rem]">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptatum.
-                  </p>
+                  <h1 className="text-lg font-medium">
+                    {author2 || <Skeleton />}
+                  </h1>
+                  <p className="text-[0.9rem]">{content2 || <Skeleton />}</p>
                   <p className="text-[0.7rem]">Lorem ipsum dolor sit amet.</p>
                 </div>
               </div>
             </div>
-            <div className="bg-red-200  relative ">
-              <div className="  flex self-center gap-5 bg-green-200 p-3">
-                <img src="https://i.pravatar.cc/100" alt="" />
+            <div className="w-full h-full relative shadow-lg xl:-left-16">
+              <div className="flex self-center gap-5 bg-purple-200 p-3 rounded-md">
+                <div className="w-[100px] h-[100px] bg-gray-100">
+                  {(
+                    <img
+                      src="https://i.pravatar.cc/103"
+                      alt=""
+                      className="w-full h-full rounded-md"
+                    />
+                  ) || <Skeleton />}
+                </div>
                 <div className="flex flex-col gap-1 self-center">
-                  <h1 className="text-lg font-medium">{name}</h1>
-                  <p className="text-[0.9rem]">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptatum.
-                  </p>
+                  <h1 className="text-lg font-medium">
+                    {author3 || <Skeleton />}
+                  </h1>
+                  <p className="text-[0.9rem]">{content3 || <Skeleton />}</p>
                   <p className="text-[0.7rem]">Lorem ipsum dolor sit amet.</p>
                 </div>
               </div>
             </div>
-            <div className="bg-red-200  relative ">
-              <div className="  flex self-center gap-5 bg-green-200 p-3">
-                <img src="https://i.pravatar.cc/100" alt="" />
+            <div className="relative shadow-lg">
+              <div className="  flex self-center gap-5 bg-purple-200 p-3 rounded-md ">
+                <div>
+                  {(
+                    <img
+                      src="https://i.pravatar.cc/102"
+                      alt=""
+                      className="w-full h-full rounded-md"
+                    />
+                  ) || <Skeleton />}
+                </div>
                 <div className="flex flex-col gap-1 self-center">
-                  <h1 className="text-lg font-medium">{name}</h1>
-                  <p className="text-[0.9rem]">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Nulla, voluptatum.
-                  </p>
+                  <h1 className="text-lg font-medium">
+                    {author4 || <Skeleton />}
+                  </h1>
+                  <p className="text-[0.9rem]">{content4 || <Skeleton />} </p>
                   <p className="text-[0.7rem]">Lorem ipsum dolor sit amet.</p>
                 </div>
               </div>
