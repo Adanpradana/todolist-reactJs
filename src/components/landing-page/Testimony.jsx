@@ -49,7 +49,7 @@ export default function Testimony() {
   }, []);
 
   return (
-    <section className="w-full  bg-slate-200 p-5 xl:px-48">
+    <section className="w-full  bg-slate-200 p-5 lg:px-20 xl:px-48">
       <div className="container m-auto w-full  flex flex-wrap ">
         <div className="w-full  text-center lg:text-left flex flex-col  lg:self-center gap-5 lg:flex-1">
           <h2 className="font-semibold text-lg uppercase ">meet todolist</h2>
@@ -81,11 +81,12 @@ export default function Testimony() {
             <p className="text-[0.9rem]">Rated 4,9/5 form over 485 review</p>
           </div>
         </div>
-        <div className="w-full  lg:self-center lg:flex-1 py-5 lg:py-0 lg:pl-10 ">
-          <div className="container bg-slate-300  flex flex-col gap-4 lg:w-[500px] lg:p-5 rounded-sm">
+        <div className="w-full lg:self-center lg:flex-1 py-5 lg:py-0 lg:pl-10 ">
+          <div className="container bg-slate-300 p-5 flex flex-col gap-4 lg:w-[500px] lg:p-5 rounded-sm">
+            <h1 className=" font-bold">Visitors</h1>
             <div className="relative shadow-lg ">
               <div className="  flex self-center gap-5 bg-purple-200 p-3 rounded-md">
-                <div className="w-[100px] h-[100px] bg-gray-100">
+                <div className="w-[100px] h-[100px] bg-gray-100 rounded-md  ">
                   {(
                     <img
                       src="https://i.pravatar.cc/100"
@@ -98,7 +99,7 @@ export default function Testimony() {
                   <h1 className="text-lg font-medium">
                     {author || <Skeleton />}
                   </h1>
-                  <p className="text-[0.9rem]">{content || <Skeleton />}</p>
+                  <p className="text-[1rem]">{content || <Skeleton />}</p>
 
                   <p className="text-[0.7rem]">Lorem ipsum dolor sit amet.</p>
                 </div>
@@ -126,7 +127,7 @@ export default function Testimony() {
             </div>
             <div className="w-full h-full relative shadow-lg xl:-left-16">
               <div className="flex self-center gap-5 bg-purple-200 p-3 rounded-md">
-                <div className="w-[100px] h-[100px] bg-gray-100">
+                <div className="w-[100px] h-[100px] bg-gray-100 rounded-md ">
                   {(
                     <img
                       src="https://i.pravatar.cc/103"
@@ -146,7 +147,7 @@ export default function Testimony() {
             </div>
             <div className="relative shadow-lg">
               <div className="  flex self-center gap-5 bg-purple-200 p-3 rounded-md ">
-                <div>
+                <div className="w-[100px] h-[100px] bg-gray-100 rounded-md ">
                   {(
                     <img
                       src="https://i.pravatar.cc/102"
