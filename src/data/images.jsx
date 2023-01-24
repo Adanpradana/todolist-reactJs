@@ -11,6 +11,7 @@ import image10 from "../assets/slider/10.svg";
 import image11 from "../assets/slider/11.png";
 import image12 from "../assets/slider/12.png";
 import image13 from "../assets/slider/13.png";
+import image14 from "../assets/slider/14.png";
 const images = [
   image1,
   image2,
@@ -25,5 +26,6 @@ const images = [
   image11,
   image12,
   image13,
+  image14,
 ];
 export default images;

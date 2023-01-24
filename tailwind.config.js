@@ -8,12 +8,12 @@ module.exports = {
       },
       keyframes: {
         scroll: {
-          "0%": { left: "0" },
-          "100%": { left: "-100%" },
+          "0%": { transform: "translateX(0)" },
+          to: { transform: "translateX(100%)" },
         },
       },
       animation: {
-        animate: "scroll 15s linear infinite",
+        animate: "scroll 25s linear infinite",
       },
       colors: {
         "dark-orchid": "#af2bbf",
