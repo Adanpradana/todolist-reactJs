@@ -27,12 +27,17 @@ export default function Technology() {
               {images.map((image) => {
                 return (
                   <div className="container p-5">
-                    <div className="flex justify-center self-center bg-white shadow-md p-2 rounded-2xl w-auto ">
-                      <img src={image} alt="" className="h-[90px] " />
+                    <div className="flex justify-center self-center bg-slate-200 shadow-md p-2 rounded-2xl w-auto ">
+                      <img
+                        src={image}
+                        alt=""
+                        className="h-[15%] aspect-[4/1] object-contain mix-blend-multiply"
+                      />
                     </div>
                   </div>
                 );
               })}
+              <div className=""></div>
             </Slider>
           </div>
         </div>
