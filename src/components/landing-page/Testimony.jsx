@@ -57,9 +57,10 @@ export default function Testimony() {
             Todo solution for your activity
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam
-            ullam quas excepturi nisi nesciunt, corrupti deleniti adipisci
-            assumenda veniam commodi qui, laborum, eos voluptate iste.
+            Solution for your next technology or traditional business. todolist
+            is a starting foundation to create incredible experience to create
+            online task management and helps managing your activity, we also
+            performs at the highest level, and accross all devices.
           </p>
           <div className="flex justify-center lg:justify-start text-center">
             <div
