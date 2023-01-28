@@ -9,20 +9,20 @@ export default function Technology() {
             Our Awesome Technology
           </h1>
           <div className="  flex justify-end overflow-hidden relative w-full mt-10">
-            <div className="w-[200%] flex animate-animate gap-10 px-5">
+            <div className=" bg-red-300 flex animate-animate gap-10 px-5">
               {images.map((image) => {
                 return (
-                  <div className="flex self-center w-64 max-h-46 rounded-lg bg-white  shadow-lg">
-                    <img src={image} alt="" className="p-5" />
+                  <div className="flex self-center w-[350px] min-h-[250px]  justify-center rounded-lg bg-white  shadow-lg">
+                    <img src={image} alt="" className="p-5 h-[10%]" />
                   </div>
                 );
               })}
             </div>
-            <div className="w-[200%] flex animate-animate gap-10 px-5">
+            <div className=" bg-red-300  flex animate-animate gap-10 px-5">
               {images.map((image) => {
                 return (
-                  <div className="flex self-center w-64 max-h-46 rounded-lg bg-white shadow-lg">
-                    <img src={image} alt="" className="p-5" />
+                  <div className="flex self-center w-[350px] min-h-[250px] justify-center rounded-lg bg-white shadow-lg">
+                    <img src={image} alt="" className="p-5 h-[10%]" />
                   </div>
                 );
               })}

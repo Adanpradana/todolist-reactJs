@@ -7,8 +7,15 @@ import github from "./../../assets/sosial-media/github.svg";
 const Footer = () => {
   return (
     <footer className=" items-center mx-auto">
-      <div className="text-center h-full">
-        <p className="text-md">We'd love to hear from you !</p>
+      <div className="text-center  min-h-full pt-20">
+        <div className="flex flex-col gap-5 pb-20">
+          <h1 className="text-5xl">Hello there!</h1>
+          <p className="text-md">
+            i hope everything going very well, i am very pleased to share
+            todolist with you, hope you enjoy it{" "}
+          </p>
+        </div>
+        <p className="text-xs">We'd love to hear from you !</p>
         <div className=" w-full flex justify-center gap-2 py-2">
           <div className="cursor-pointer">
             <img

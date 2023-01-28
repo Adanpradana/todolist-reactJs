@@ -5,7 +5,7 @@ import Hero from "./Hero";
 import Customer from "./Customer";
 import Testimony from "./Testimony";
 import Technology from "./Technology";
-
+import Footer from "./Footer";
 const LandingPage = () => {
   useEffect(() => {
     if (localStorage.getItem("name") && localStorage.getItem("id")) {
@@ -19,6 +19,7 @@ const LandingPage = () => {
       <Customer />
       <Testimony />
       <Technology />
+      <Footer />
     </section>
   );
 };
