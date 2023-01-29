@@ -12,7 +12,7 @@ export default function Technology() {
             <div className=" bg-red-300 flex animate-animate gap-10 px-5">
               {images.map((image) => {
                 return (
-                  <div className="flex self-center w-[350px] min-h-[250px]  justify-center rounded-lg bg-white  shadow-lg">
+                  <div className="flex self-center w-[350px] min-h-[150px]  justify-center rounded-lg bg-white  shadow-lg">
                     <img src={image} alt="" className="p-5 h-[10%]" />
                   </div>
                 );
@@ -21,7 +21,7 @@ export default function Technology() {
             <div className=" bg-red-300  flex animate-animate gap-10 px-5">
               {images.map((image) => {
                 return (
-                  <div className="flex self-center w-[350px] min-h-[250px] justify-center rounded-lg bg-white shadow-lg">
+                  <div className="flex self-center w-[350px] min-h-[150px] justify-center rounded-lg bg-white shadow-lg">
                     <img src={image} alt="" className="p-5 h-[10%]" />
                   </div>
                 );
