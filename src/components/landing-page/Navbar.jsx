@@ -69,7 +69,7 @@ const Navbar = () => {
                 ease-in-out
               border-zinc-300"
           >
-            <Link to={"/login"}>
+            <Link to={"/auth/login"}>
               <button className="py-2 px-8 font-normal text-white">
                 LOGIN
               </button>
