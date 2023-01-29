@@ -53,7 +53,7 @@ const Navbar = () => {
                   <button>REQUEST DEMO</button>
                 </li>
                 <li className=" py-3 md:py-5 md:hidden md:border-b-2 md:border-b-transparent hover:border-blue-400 hover:text-blue-400">
-                  <Link to={"/login"}>
+                  <Link to={"/auth/login"}>
                     <button>LOGIN</button>
                   </Link>
                 </li>

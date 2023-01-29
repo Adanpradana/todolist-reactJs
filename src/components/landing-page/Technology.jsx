@@ -2,7 +2,7 @@ import images from "../../data/images";
 
 export default function Technology() {
   return (
-    <section className=" w-full bg-slate-300  p-5 lg:px-20 xl:px-0">
+    <section className=" w-full bg-slate-300  p-5  lg:px-0">
       <div className="  w-full py-5">
         <div className="flex flex-col gap-5 w-full">
           <h1 className="text-center text-2xl font-semibold">

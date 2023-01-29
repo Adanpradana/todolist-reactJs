@@ -6,7 +6,7 @@ import github from "./../../assets/sosial-media/github.svg";
 
 const Footer = () => {
   return (
-    <footer className=" items-center mx-auto">
+    <footer className=" items-center mx-auto bg-slate-200">
       <div className="text-center  min-h-full pt-20">
         <div className="flex flex-col gap-5 pb-20">
           <h1 className="text-5xl">Hello there!</h1>

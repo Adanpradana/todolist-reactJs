@@ -64,7 +64,7 @@ const Register = () => {
       });
   };
   return (
-    <div className="xxl:container bg-neutral-400  px-10 m-auto flex justify-center items-center l h-screen ">
+    <div className="xxl:container bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-400  px-10 m-auto flex justify-center items-center l h-screen ">
       <div className="container bg-white max-w-lg text-center p-10 rounded-xl ">
         <ToastContainer
           position="top-center"

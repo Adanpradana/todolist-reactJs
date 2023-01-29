@@ -44,7 +44,7 @@ const Hero = () => {
               ease-in-out
             border-zinc-300"
             >
-              <Link to={"/login"}>
+              <Link to={"/auth/login"}>
                 <button className="py-2 px-14 font-semibold text-white  ">
                   GET STARTED
                 </button>

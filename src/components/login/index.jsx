@@ -57,7 +57,7 @@ const Login = () => {
       .finally(() => setLoading(false));
   };
   return (
-    <div className="xxl:container bg-neutral-400  px-10 m-auto flex justify-center items-center l h-screen ">
+    <div className="xxl:container bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-400  px-10 m-auto flex justify-center items-center l h-screen ">
       <div>
         <ToastContainer
           position="top-center"
