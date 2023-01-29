@@ -126,7 +126,7 @@ export default function Testimony() {
                 </div>
               </div>
             </div>
-            <div className="w-full h-full relative shadow-lg xl:-left-16">
+            <div className="w-full h-full relative shadow-lg lg:-left-16">
               <div className="flex self-center gap-5 bg-purple-200 p-3 rounded-md">
                 <div className="w-[100px] h-[100px] bg-gray-100 rounded-md ">
                   {(
