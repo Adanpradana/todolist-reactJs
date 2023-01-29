@@ -73,7 +73,7 @@ const Login = () => {
           id
         />
       </div>
-      <div className="container bg-white max-w-lg text-center p-10 rounded-xl ">
+      <div className="container bg-white max-w-lg text-center p-10 rounded-xl shadow-lg">
         <div className="pb-5">
           <h1 className="font-bold text-3xl pb-5">User Login</h1>
           <p className="leading-relaxed">
