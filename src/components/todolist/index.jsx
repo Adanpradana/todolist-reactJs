@@ -5,12 +5,14 @@ import { BsPersonCircle } from "react-icons/bs";
 import { RotatingLines } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../useContext/app-context";
+import { BsChevronDown } from "react-icons/bs";
 import ReactTooltip from "react-tooltip";
 import EmptyTodo from "./Empty";
 import Edit from "./Edit";
 import axios from "axios";
 
 import "react-toastify/dist/ReactToastify.css";
+// import "react-tooltip/dist/react-tooltip.css";
 import "../index.css";
 import "animate.css";
 
@@ -151,7 +153,7 @@ const Todolist = () => {
   };
   return (
     <AppContext.Provider value={valueProvider}>
-      <div className="xxl:container bg-slate-50 mx-auto w-full text-center xxl:m-0 xxl:w-full">
+      <div className="xxl:container bg-slate-50 mx-auto w-full text-center xxl:m-0 h-screen">
         <div>
           <ToastContainer
             position="top-center"
@@ -262,27 +264,24 @@ const Todolist = () => {
                 todolists.map((res) => {
                   return (
                     <div
-                      className=" hover:bg-violet-50 border-b-2 last:border-none px-[5px]"
+                      className=" hover:bg-violet-50 border-b-2 last:border-none px-[5px] "
                       onMouseEnter={() => hoverHandler(res)}
-                      onMouseLeave={() => hoverleave(-1)}
+                      // onMouseLeave={() => hoverleave(-1)}
                     >
                       {showEdit === res.id ? (
                         <div className="h-[50px] flex px-3">
                           <Edit />
                         </div>
                       ) : (
-                        <div
-                          data-tip={res.name}
-                          data-for="todolist"
-                          className="flex  px-2 h-[50px] relative"
-                        >
+                        <div className="flex self-center justify-center px-2 h-[50px] relative">
                           <ReactTooltip
-                            id="todolist"
-                            place="bottom"
+                            id="edit"
+                            place="right"
                             effect="solid"
-                            padding="5px"
-                          />
-
+                            padding="10px"
+                          >
+                            <span>Edit</span>
+                          </ReactTooltip>
                           <div className=" flex self-center w-full p-2 gap-3">
                             <div className="flex self-center  text-gray-700">
                               <p>{res.todolist}</p>
@@ -294,25 +293,51 @@ const Todolist = () => {
                                   : "p-2 hover:bg-violet-200  rounded-md cursor-pointer hidden"
                               }
                               onClick={() => showEditHandler(res)}
+                              data-tip
+                              data-for="edit"
                             >
                               <i className="text-xl  text-gray-500">
                                 <BiPencil />
                               </i>
                             </div>
                           </div>
-                          <button onClick={(e) => removeTodoList(res, e)}>
-                            <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
-                              <i
-                                className={
-                                  hover === res.id
-                                    ? "text-xl text-red-400"
-                                    : "hidden"
-                                }
-                              >
-                                <BiTrash />
-                              </i>
-                            </div>
-                          </button>
+                          <div className="flex gap-3">
+                            {hover === res.id && (
+                              <div className="flex self-center dropdown gap-5">
+                                <button className=" hover:bg-green-700 hover:text-white hover:ease-in-out uppercase bg-green-200 font-semibold text-sm text-green-500 py-[2px] px-3 rounded-md flex justify-between gap-3">
+                                  <p>done</p>
+                                  <div className=" flex self-center font-bold">
+                                    <BsChevronDown />
+                                  </div>
+                                </button>
+                              </div>
+                            )}
+                            <ReactTooltip
+                              id="todolist"
+                              place="top"
+                              effect="solid"
+                              padding="10px"
+                            >
+                              <span>Delete</span>
+                            </ReactTooltip>
+                            <button
+                              data-tip
+                              data-for="todolist"
+                              onClick={(e) => removeTodoList(res, e)}
+                            >
+                              <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
+                                <i
+                                  className={
+                                    hover === res.id
+                                      ? "text-xl text-red-400"
+                                      : "hidden"
+                                  }
+                                >
+                                  <BiTrash />
+                                </i>
+                              </div>
+                            </button>
+                          </div>
                         </div>
                       )}
                     </div>
