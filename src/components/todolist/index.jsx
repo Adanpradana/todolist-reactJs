@@ -27,7 +27,27 @@ const Todolist = () => {
   const [edit, setEdit] = useState("");
   const [showEdit, setShowEdit] = useState(-1);
   const [hover, setHover] = useState(-1);
+  const [isDone, setIsDone] = useState(false);
+  const [status, setStatus] = useState(false);
+  const [onProgress, setOnprogress] = useState(false);
+  const [onTodo, setOnTodo] = useState(null);
 
+  const statusHandler = () => {
+    setStatus(!status);
+  };
+
+  const buttonStatusHandler = (button) => {
+    if (button === "onProgress") {
+      todolists.map((response) => console.log(response.isdone));
+      setOnprogress(true);
+    } else if (button === "onTodo") {
+      console.log("todo");
+      setOnTodo(true);
+    } else if (button === "isDone") {
+      console.log("done");
+      setIsDone(true);
+    }
+  };
   //utils
   const [loading, setLoading] = useState(false);
 
@@ -243,7 +263,7 @@ const Todolist = () => {
           </div>
         )}
 
-        <div className="pt-20 text-left px-10 ">
+        <div className="pt-20 text-left p-10 ">
           <div className="pb-4  flex flex-col items-center">
             <div className="text-center">
               {loading && (
@@ -258,13 +278,13 @@ const Todolist = () => {
             </div>
             <h1 className="text-lg text-center pt-5">ACTIVITY</h1>
           </div>
-          <div className="border border-slate-400 rounded-md overflow-hidden mb-8">
+          <div className="border border-slate-400 rounded-md  mb-8 relative">
             {todolists.length > 0 ? (
               Children.toArray(
                 todolists.map((res) => {
                   return (
                     <div
-                      className=" hover:bg-violet-50 border-b-2 last:border-none px-[5px] "
+                      className=" hover:bg-violet-50 border-b-2 last:border-none last:rounded-md first:rounded-md px-[5px] "
                       onMouseEnter={() => hoverHandler(res)}
                       // onMouseLeave={() => hoverleave(-1)}
                     >
@@ -304,12 +324,55 @@ const Todolist = () => {
                           <div className="flex gap-3">
                             {hover === res.id && (
                               <div className="flex self-center dropdown gap-5">
-                                <button className=" hover:bg-green-700 hover:text-white hover:ease-in-out uppercase bg-green-200 font-semibold text-sm text-green-500 py-[2px] px-3 rounded-md flex justify-between gap-3">
-                                  <p>done</p>
-                                  <div className=" flex self-center font-bold">
+                                <button
+                                  onClick={statusHandler}
+                                  className=" hover:bg-green-700 text-[0.9rem] font-bold hover:text-white hover:transition-all  uppercase bg-green-200  text-green-500 py-[1px] px-1 rounded-md flex justify-between gap-3"
+                                >
+                                  <p>Done</p>
+                                  <div className=" flex self-center  ">
                                     <BsChevronDown />
                                   </div>
                                 </button>
+                                {status && (
+                                  <div className="bg-white rounded-lg shadow-md  w-44 absolute  -bottom-24 z-50 right-1  flex flex-col ">
+                                    <button
+                                      onClick={() =>
+                                        buttonStatusHandler("onProgress")
+                                      }
+                                      className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
+                                    >
+                                      <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
+                                        <p className="bg-violet-300 text-violet-600 rounded-md py-[1px] font-semibold text-sm px-1">
+                                          In Progress
+                                        </p>
+                                      </div>
+                                    </button>
+                                    <button
+                                      onClick={() =>
+                                        buttonStatusHandler("onTodo")
+                                      }
+                                      className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
+                                    >
+                                      <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
+                                        <p className="bg-slate-200 text-slate-400 rounded-md py-[1px] font-semibold text-sm px-1">
+                                          Todo
+                                        </p>
+                                      </div>
+                                    </button>
+                                    <button
+                                      onClick={() =>
+                                        buttonStatusHandler("isDone")
+                                      }
+                                      className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
+                                    >
+                                      <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
+                                        <p className="bg-green-200 text-green-400 rounded-md py-[1px] font-semibold text-sm px-1">
+                                          Done
+                                        </p>
+                                      </div>
+                                    </button>
+                                  </div>
+                                )}
                               </div>
                             )}
                             <ReactTooltip
