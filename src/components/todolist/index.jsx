@@ -27,13 +27,15 @@ const Todolist = () => {
   const [edit, setEdit] = useState("");
   const [showEdit, setShowEdit] = useState(-1);
   const [hover, setHover] = useState(-1);
-  const [isDone, setIsDone] = useState(false);
+  const [isDone, setIsDone] = useState(0);
   const [status, setStatus] = useState(-1);
   const [onProgress, setOnprogress] = useState(false);
   const [onTodo, setOnTodo] = useState(null);
+  const [id, setId] = useState(0);
   const refEl = useRef(null);
   function showStatusHandler(res) {
     setStatus(res.id);
+    setId(res.id);
   }
   const buttonStatusHandler = (button) => {
     if (button === "onProgress") {
@@ -42,10 +44,19 @@ const Todolist = () => {
       // setOnprogress(true);
     } else if (button === "onTodo") {
       console.log("todo");
-      setOnTodo(true);
     } else if (button === "isDone") {
-      console.log("done");
-      setIsDone(true);
+      setIsDone(1);
+      setStatus(false);
+      const data = {
+        id: id,
+        userId: idStore,
+        isdone: isDone,
+      };
+      axios({
+        method: "PUT",
+        url: `${process.env.REACT_APP_BASEURL}/users/todolist`,
+        data: data,
+      }).then(() => setHandler(!handler));
     }
   };
   //utils
@@ -71,6 +82,7 @@ const Todolist = () => {
       method: "GET",
       url: `${process.env.REACT_APP_BASEURL}/users/${nameStore}/todolist`,
     }).then((res) => setTodolists(res.data.users[0].todolist));
+
     window.addEventListener("click", triggerOutside, true);
     return () => window.removeEventListener("click", triggerOutside, true);
   }, [handler]);
@@ -99,7 +111,7 @@ const Todolist = () => {
     const addData = {
       todolist: newTodo,
       userId: idStore,
-      isdone: false,
+      isdone: isDone,
     };
     axios({
       method: "POST",
@@ -336,7 +348,7 @@ const Todolist = () => {
                                 onClick={() => showStatusHandler(res)}
                                 className=" hover:bg-green-700 text-[0.9rem] font-bold hover:text-white hover:transition-all  uppercase bg-green-200  text-green-500 py-[1px] px-1 rounded-md flex justify-between gap-3"
                               >
-                                <p>{}</p>
+                                <p>{res.isdone ? "DONE" : "INPROGRESS"}</p>
                                 <div className=" flex self-center  ">
                                   <BsChevronDown />
                                 </div>
