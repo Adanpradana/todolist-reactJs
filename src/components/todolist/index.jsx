@@ -1,4 +1,4 @@
-import React, { Children, useEffect, useState } from "react";
+import React, { Children, useEffect, useState, useRef } from "react";
 import { BiPlus, BiPencil, BiTrash } from "react-icons/bi";
 import { ToastContainer, toast } from "react-toastify";
 import { BsPersonCircle } from "react-icons/bs";
@@ -28,18 +28,18 @@ const Todolist = () => {
   const [showEdit, setShowEdit] = useState(-1);
   const [hover, setHover] = useState(-1);
   const [isDone, setIsDone] = useState(false);
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState(-1);
   const [onProgress, setOnprogress] = useState(false);
   const [onTodo, setOnTodo] = useState(null);
-
-  const statusHandler = () => {
-    setStatus(!status);
-  };
-
+  const refEl = useRef(null);
+  function showStatusHandler(res) {
+    setStatus(res.id);
+  }
   const buttonStatusHandler = (button) => {
     if (button === "onProgress") {
-      todolists.map((response) => console.log(response.isdone));
-      setOnprogress(true);
+      // todolists.map((response) => console.log(response.isdone));
+      console.log("okje");
+      // setOnprogress(true);
     } else if (button === "onTodo") {
       console.log("todo");
       setOnTodo(true);
@@ -52,6 +52,11 @@ const Todolist = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const triggerOutside = (e) => {
+    if (refEl.current && !refEl.current.contains(e.target)) {
+      setStatus(false);
+    }
+  };
 
   useEffect(() => {
     // if (!localStorage.getItem("name") && !localStorage.getItem("id")) {
@@ -66,6 +71,8 @@ const Todolist = () => {
       method: "GET",
       url: `${process.env.REACT_APP_BASEURL}/users/${nameStore}/todolist`,
     }).then((res) => setTodolists(res.data.users[0].todolist));
+    window.addEventListener("click", triggerOutside, true);
+    return () => window.removeEventListener("click", triggerOutside, true);
   }, [handler]);
 
   const addHandler = (e) => {
@@ -172,6 +179,7 @@ const Todolist = () => {
     error,
     setEerror,
   };
+
   return (
     <AppContext.Provider value={valueProvider}>
       <div className="xxl:container bg-slate-50 mx-auto w-full text-center xxl:m-0 h-screen">
@@ -287,14 +295,14 @@ const Todolist = () => {
                     <div
                       className=" hover:bg-violet-50 border-b-2 last:border-none last:rounded-md first:rounded-md px-[5px] "
                       onMouseEnter={() => hoverHandler(res)}
-                      // onMouseLeave={() => hoverleave(-1)}
+                      onMouseLeave={() => hoverleave(-1)}
                     >
                       {showEdit === res.id ? (
                         <div className="h-[50px] flex px-3">
                           <Edit />
                         </div>
                       ) : (
-                        <div className="flex self-center justify-center px-2 h-[50px] relative">
+                        <div className="flex self-center justify-center px-2 h-[50px] relative ">
                           <ReactTooltip
                             id="edit"
                             place="right"
@@ -322,60 +330,63 @@ const Todolist = () => {
                               </i>
                             </div>
                           </div>
-                          <div className="flex gap-3">
-                            {hover === res.id && (
-                              <div className="flex self-center dropdown gap-5">
-                                <button
-                                  onClick={statusHandler}
-                                  className=" hover:bg-green-700 text-[0.9rem] font-bold hover:text-white hover:transition-all  uppercase bg-green-200  text-green-500 py-[1px] px-1 rounded-md flex justify-between gap-3"
+                          <div className="flex gap-5  ">
+                            <div className="flex self-center dropdown px-5 ">
+                              <button
+                                onClick={() => showStatusHandler(res)}
+                                className=" hover:bg-green-700 text-[0.9rem] font-bold hover:text-white hover:transition-all  uppercase bg-green-200  text-green-500 py-[1px] px-1 rounded-md flex justify-between gap-3"
+                              >
+                                <p>{}</p>
+                                <div className=" flex self-center  ">
+                                  <BsChevronDown />
+                                </div>
+                              </button>
+                              {status === res.id && (
+                                <div
+                                  className="bg-white rounded-lg shadow-md  w-44 absolute  -bottom-32 z-50 right-1  flex flex-col "
+                                  ref={refEl}
                                 >
-                                  <p>done</p>
-                                  <div className=" flex self-center  ">
-                                    <BsChevronDown />
-                                  </div>
-                                </button>
-                                {status && (
-                                  <div className="bg-white rounded-lg shadow-md  w-44 absolute  -bottom-24 z-50 right-1  flex flex-col ">
-                                    <button
-                                      onClick={() =>
-                                        buttonStatusHandler("onProgress")
-                                      }
-                                      className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
-                                    >
-                                      <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
-                                        <p className="bg-violet-300 text-violet-600 rounded-md py-[1px] font-semibold text-sm px-1">
-                                          In Progress
-                                        </p>
-                                      </div>
-                                    </button>
-                                    <button
-                                      onClick={() =>
-                                        buttonStatusHandler("onTodo")
-                                      }
-                                      className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
-                                    >
-                                      <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
-                                        <p className="bg-slate-200 text-slate-400 rounded-md py-[1px] font-semibold text-sm px-1">
-                                          Todo
-                                        </p>
-                                      </div>
-                                    </button>
-                                    <button
-                                      onClick={() =>
-                                        buttonStatusHandler("isDone")
-                                      }
-                                      className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
-                                    >
-                                      <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
-                                        <p className="bg-green-200 text-green-400 rounded-md py-[1px] font-semibold text-sm px-1">
-                                          Done
-                                        </p>
-                                      </div>
-                                    </button>
-                                  </div>
-                                )}
-                              </div>
-                            )}
+                                  {}
+                                  <button
+                                    onClick={() =>
+                                      buttonStatusHandler("onProgress")
+                                    }
+                                    className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
+                                  >
+                                    <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
+                                      <p className="bg-violet-300 text-violet-600 rounded-md py-[1px] font-semibold text-sm px-1">
+                                        In Progress
+                                      </p>
+                                    </div>
+                                  </button>
+                                  <button
+                                    onClick={() =>
+                                      buttonStatusHandler("onTodo")
+                                    }
+                                    className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
+                                  >
+                                    <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
+                                      <p className="bg-slate-200 text-slate-400 rounded-md py-[1px] font-semibold text-sm px-1">
+                                        Todo
+                                      </p>
+                                    </div>
+                                  </button>
+                                  <button
+                                    onClick={() =>
+                                      buttonStatusHandler("isDone")
+                                    }
+                                    className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
+                                  >
+                                    <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
+                                      <p className="bg-green-200 text-green-400 rounded-md py-[1px] font-semibold text-sm px-1">
+                                        Done
+                                      </p>
+                                    </div>
+                                  </button>
+                                </div>
+                              )}
+                            </div>
+
                             <ReactTooltip
                               id="todolist"
                               place="top"
@@ -384,24 +395,24 @@ const Todolist = () => {
                             >
                               <span>Delete</span>
                             </ReactTooltip>
-                            <button
-                              data-tip
-                              data-for="todolist"
-                              onClick={(e) => removeTodoList(res, e)}
-                            >
-                              <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
-                                <i
-                                  className={
-                                    hover === res.id
-                                      ? "text-xl text-red-400"
-                                      : "hidden"
-                                  }
-                                >
-                                  <BiTrash />
-                                </i>
-                              </div>
-                            </button>
                           </div>
+                          <button
+                            data-tip
+                            data-for="todolist"
+                            onClick={(e) => removeTodoList(res, e)}
+                          >
+                            <div className="p-2 rounded-md hover:bg-red-200 flex self-center">
+                              <i
+                                className={
+                                  hover === res.id
+                                    ? "text-xl text-red-400"
+                                    : "text-xl invisible"
+                                }
+                              >
+                                <BiTrash />
+                              </i>
+                            </div>
+                          </button>
                         </div>
                       )}
                     </div>
