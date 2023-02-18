@@ -92,6 +92,7 @@ const Todolist = () => {
     const addData = {
       todolist: newTodo,
       userId: idStore,
+      isdone: false,
     };
     axios({
       method: "POST",
@@ -328,7 +329,7 @@ const Todolist = () => {
                                   onClick={statusHandler}
                                   className=" hover:bg-green-700 text-[0.9rem] font-bold hover:text-white hover:transition-all  uppercase bg-green-200  text-green-500 py-[1px] px-1 rounded-md flex justify-between gap-3"
                                 >
-                                  <p>Done</p>
+                                  <p>done</p>
                                   <div className=" flex self-center  ">
                                     <BsChevronDown />
                                   </div>

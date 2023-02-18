@@ -50,8 +50,8 @@ export default function Testimony() {
 
   return (
     <section className="w-full  bg-slate-200 p-5 lg:px-20 xl:px-48">
-      <div className="container m-auto w-full  flex flex-wrap ">
-        <div className="w-full  text-center lg:text-left flex flex-col  lg:self-center gap-5 lg:flex-1">
+      <div className="container m-auto w-full  flex flex-wrap  justify-between">
+        <div className="w-full  text-center lg:text-left flex flex-col  lg:self-center gap-5 lg:flex-1 ">
           <h2 className="font-semibold text-lg uppercase ">meet todolist</h2>
           <h1 className="font-semibold text-4xl w-full text-violet-900">
             Todo solution for your activity
@@ -78,12 +78,12 @@ export default function Testimony() {
             </div>
           </div>
           <div className=" flex justify-center self-center lg:self-start gap-2 pt-20">
-            <HiStar className="text-slate-900 text-2xl bg-yellow-300" />
+            <HiStar className="text-slate-900 text-2xl" />
             <p className="text-[0.9rem]">Rated 4,9/5 form over 485 review</p>
           </div>
         </div>
         <div className="w-full lg:self-center lg:flex-1 py-5 lg:py-0 lg:pl-10 ">
-          <div className="container bg-slate-300 p-5 flex flex-col gap-4 lg:w-[500px] lg:p-5 rounded-sm">
+          <div className="container bg-slate-300 p-5 flex flex-col gap-4 lg:w-[500px] xl:w-full lg:p-5 rounded-sm">
             <h1 className=" font-bold">Visitors</h1>
             <div className="relative shadow-lg ">
               <div className="  flex self-center gap-5 bg-purple-200 p-3 rounded-md">
