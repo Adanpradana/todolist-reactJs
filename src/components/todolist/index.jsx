@@ -29,36 +29,43 @@ const Todolist = () => {
   const [hover, setHover] = useState(-1);
   const [isDone, setIsDone] = useState(0);
   const [status, setStatus] = useState(-1);
-  const [onProgress, setOnprogress] = useState(false);
-  const [onTodo, setOnTodo] = useState(null);
   const [id, setId] = useState(0);
+
+  const [progresValue, setProgressValue] = useState(0);
+  const [doneValue, setDoneValue] = useState(1);
+
   const refEl = useRef(null);
   function showStatusHandler(res) {
     setStatus(res.id);
     setId(res.id);
   }
-  const buttonStatusHandler = (button) => {
-    if (button === "onProgress") {
-      // todolists.map((response) => console.log(response.isdone));
-      console.log("okje");
-      // setOnprogress(true);
-    } else if (button === "onTodo") {
-      console.log("todo");
-    } else if (button === "isDone") {
-      setIsDone(1);
-      setStatus(false);
-      const data = {
-        id: id,
-        userId: idStore,
-        isdone: isDone,
-      };
-      axios({
-        method: "PUT",
-        url: `${process.env.REACT_APP_BASEURL}/users/todolist`,
-        data: data,
-      }).then(() => setHandler(!handler));
-    }
+
+  const editStatus = async (value) => {
+    const data = {
+      id: id,
+      userId: idStore,
+      isdone: value,
+    };
+    return await axios({
+      method: "PUT",
+      url: `${process.env.REACT_APP_BASEURL}/users/todolist`,
+      data: data,
+    })
+      .then(() => setHandler(!handler))
+      .finally(() => setLoading(false));
   };
+
+  function inProgressHandler(res, e) {
+    setLoading(true);
+    setStatus(false);
+    editStatus(progresValue);
+  }
+  function doneHandler(res, e) {
+    setLoading(true);
+    setStatus(false);
+    editStatus(doneValue);
+  }
+
   //utils
   const [loading, setLoading] = useState(false);
 
@@ -84,7 +91,6 @@ const Todolist = () => {
     }).then((res) => setTodolists(res.data.users[0].todolist));
 
     window.addEventListener("click", triggerOutside, true);
-    return () => window.removeEventListener("click", triggerOutside, true);
   }, [handler]);
 
   const addHandler = (e) => {
@@ -111,7 +117,7 @@ const Todolist = () => {
     const addData = {
       todolist: newTodo,
       userId: idStore,
-      isdone: isDone,
+      isdone: 0,
     };
     axios({
       method: "POST",
@@ -346,7 +352,11 @@ const Todolist = () => {
                             <div className="flex self-center dropdown px-5 ">
                               <button
                                 onClick={() => showStatusHandler(res)}
-                                className=" hover:bg-green-700 text-[0.9rem] font-bold hover:text-white hover:transition-all  uppercase bg-green-200  text-green-500 py-[1px] px-1 rounded-md flex justify-between gap-3"
+                                className={
+                                  res.isdone
+                                    ? "hover:bg-green-700 text-[0.9rem] font-bold hover:text-white hover:transition-all  uppercase bg-green-200  text-green-500 py-[1px] px-1 rounded-md flex justify-between gap-3"
+                                    : "bg-violet-300 text-violet-600 rounded-md py-[1px] font-semibold text-sm px-1 flex gap-3 "
+                                }
                               >
                                 <p>{res.isdone ? "DONE" : "INPROGRESS"}</p>
                                 <div className=" flex self-center  ">
@@ -355,46 +365,27 @@ const Todolist = () => {
                               </button>
                               {status === res.id && (
                                 <div
-                                  className="bg-white rounded-lg shadow-md  w-44 absolute  -bottom-32 z-50 right-1  flex flex-col "
+                                  className="bg-white rounded-lg shadow-md  w-44 absolute  -bottom-[5.3rem] z-50 right-1  flex flex-col "
                                   ref={refEl}
                                 >
-                                  {}
-                                  <button
-                                    onClick={() =>
-                                      buttonStatusHandler("onProgress")
-                                    }
-                                    className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
-                                  >
-                                    <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
-                                      <p className="bg-violet-300 text-violet-600 rounded-md py-[1px] font-semibold text-sm px-1">
-                                        In Progress
-                                      </p>
-                                    </div>
-                                  </button>
-                                  <button
-                                    onClick={() =>
-                                      buttonStatusHandler("onTodo")
-                                    }
-                                    className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
-                                  >
-                                    <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
-                                      <p className="bg-slate-200 text-slate-400 rounded-md py-[1px] font-semibold text-sm px-1">
-                                        Todo
-                                      </p>
-                                    </div>
-                                  </button>
-                                  <button
-                                    onClick={() =>
-                                      buttonStatusHandler("isDone")
-                                    }
-                                    className="hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2"
-                                  >
-                                    <div className="uppercase flex py-[2px] pl-3 font-semibold text-sm ">
-                                      <p className="bg-green-200 text-green-400 rounded-md py-[1px] font-semibold text-sm px-1">
-                                        Done
-                                      </p>
-                                    </div>
-                                  </button>
+                                  <div className="pl-3 hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2">
+                                    <button
+                                      onClick={(e) => inProgressHandler(res, e)}
+                                      value={progresValue}
+                                      className="uppercase bg-violet-300 text-violet-600 rounded-md py-[1px] font-semibold text-sm px-1 flex gap-3"
+                                    >
+                                      In Progress
+                                    </button>
+                                  </div>
+                                  <div className="pl-3 hover:bg-slate-50 border-l-4 border-l-white hover:border-l-violet-500 py-2">
+                                    <button
+                                      onClick={(e) => doneHandler(res, e)}
+                                      value={doneValue}
+                                      className="uppercase bg-green-200 text-green-400 rounded-md py-[1px] font-semibold text-sm px-1"
+                                    >
+                                      done
+                                    </button>
+                                  </div>
                                 </div>
                               )}
                             </div>
