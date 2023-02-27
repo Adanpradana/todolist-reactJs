@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "./components/landing-page/";
+import LandingPage from "./components/landing-page";
 import Register from "./components/register";
 import Todolist from "./components/todolist";
 import Login from "./components/login";
