@@ -13,7 +13,7 @@ const LandingPage = () => {
     }
   }, []);
   return (
-    <section data-testid="test-1">
+    <section>
       <Navbar />
       <Hero />
       <Customer />

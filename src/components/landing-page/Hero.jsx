@@ -52,7 +52,7 @@ const Hero = () => {
             </div>
           </div>
           <div className="lg:h-fit w-full flex justify-center md:justify-end">
-            <img src={heroImg} alt="" className="" />
+            <img src={heroImg} testsId="imgTest" alt="hero img" className="" />
           </div>
           <div className="w-full  md:absolute px-5 md:px-10 lg:px-48 left-0 -bottom-24  flex self-center justify-center">
             <div className=" container w-full h-auto flex self-center justify-center gap-5 flex-wrap md:flex-nowrap">
